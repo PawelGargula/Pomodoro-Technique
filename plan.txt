@@ -1,0 +1,9 @@
+HEADER 
+ Pomodoro
+
+MAIN
+ START Pomodoro Timer (25min); bell; sesions++
+ if (sesion < 4)say: Short break! (3-5 minutes)
+ else if (session == 4) say: Time for long break! (15-30 minutes); reset sesion to 0 (session == 0)
+
+FOOTER 
