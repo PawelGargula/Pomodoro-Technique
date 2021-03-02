@@ -6,8 +6,32 @@ body {
     margin: 0;
 }
 
-.flex-container {
+.full-screen-container {
+    background-color: #f4f5f0;
     width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.full-screen-container::before {
+    flex-grow: 1;
+    content: '';
+    height: 100vh;
+    background-color: #008c45;
+}
+
+.full-screen-container::after {
+    flex-grow: 1;
+    content: '';
+    height: 100vh;
+    background-color:  #cd212a;
+}
+
+.content-container {
+    padding: 0 100px;
+    flex-shrink: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
