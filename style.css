@@ -39,13 +39,13 @@ body {
     padding: 10px;
 }
 
-a.info {
+.info {
     color:black;
     text-decoration: none;
     font-size: 0.5em;
 }
 
-a.info:hover {
+.info:hover {
     color: #ff6347;
 }
 
@@ -56,7 +56,42 @@ a.info:hover {
 }
 
 .timer-logo {
+    font-size: 1.2em;
+}
+
+/* .clock {
+
+} */
+
+button {
+    display: block;
+    margin: 5px 0;
+    width: 100%;
+    background-color: #f4f5f0;
     font-size: 1.4em;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    border-radius: 5%;
+}
+
+button.start-pause {
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+button.start-pause:hover, button.start-pause:focus {
+    background-color: #4CAF50;
+    color: #f4f5f0;
+}
+
+button.reset {
+    color: #008CBA;
+    border: 2px solid #008CBA;
+}
+
+button.reset:hover, button.reset:focus {
+    background-color: #008CBA;
+    color: #f4f5f0;
 }
 
 .footer {
