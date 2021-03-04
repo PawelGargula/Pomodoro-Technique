@@ -1,15 +1,17 @@
 class Timer {
-    constructor(initialValue, clock, startStopButton, resetButton) {
+    constructor(initialValue, clock, startStopButton, resetButton, counterElement) {
         this.initialValue = initialValue;
         this.clock = clock;
         this.startStopButton = startStopButton;
         this.resetButton = resetButton;
+        this.counterElement = counterElement;
         this.presentValue = initialValue;
         this.counter = 0;
+        this.clockUpdater;
     }
-
+    
     startStop() {
-        if (this.startButtonVisible) {
+        if (this.startStopButton.classList.contains("start")) {
             this.start();
         }
         else {
@@ -17,23 +19,33 @@ class Timer {
         }
     }
 
-    get startButtonVisible() {
-        return this.startStopButton.classList.contains("start");
-    }
-
     start() {
         replaceClass(this.startStopButton, 'start', 'stop');
         this.startStopButton.innerHTML = "Stop";
+        this.clockUpdater = setInterval(() => this.updateClock(), 1000);
+    }
+
+    updateClock() {
+        this.presentValue = this.presentValue - 1000;
+        this.clock.innerHTML = convertMiliseconds(this.presentValue);
+            
+        if (this.presentValue < 1) {
+            this.stop();
+            this.counter++;
+            this.counterElement.innerHTML = "Counter: " + this.counter;
+            this.presentValue = this.initialValue;
+        }
     }
 
     stop() {
+        clearInterval(this.clockUpdater);
         replaceClass(this.startStopButton, 'stop', 'start');
         this.startStopButton.innerHTML = "Start";
     }
 
     reset() {
-        replaceClass(this.startStopButton, 'stop', 'start');
-        this.startStopButton.innerHTML = "Start";
+        this.stop();
+        this.presentValue = this.initialValue;
         this.clock.innerHTML = convertMiliseconds(this.initialValue);
     }
 }
@@ -44,13 +56,12 @@ const timerInitialValue = 25*60*1000;
 const clock = document.getElementById('clock');
 const startStopButton = document.getElementById('start-stop');
 const resetButton = document.getElementById('reset');
+const counterElement = document.getElementById('counter');
 
-const timer = new Timer(timerInitialValue, clock, startStopButton, resetButton);
+const timer = new Timer(timerInitialValue, clock, startStopButton, resetButton, counterElement);
 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());
-
-console.log(convertMiliseconds(timerInitialValue));
 
 function convertMiliseconds(miliseconds) {
     let minutes = Math.floor((miliseconds % (1000 * 60 * 60)) / (1000 * 60));
