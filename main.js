@@ -1,26 +1,53 @@
 class Timer {
-    constructor(timerValue, startStopButton, resetButton) {
-        this.timerValue = timerValue;
+    constructor(initialValue, startStopButton, resetButton) {
+        this.initialValue = initialValue;
         this.startStopButton = startStopButton;
         this.resetButton = resetButton;
+        this.presentValue = initialValue;
+        this.counter = 0;
     }
 
-    startStopTimer() {
-        ;
+    startStop() {
+        if (this.startButtonVisible) {
+            this.start();
+        }
+        else {
+            this.stop();
+        }
     }
 
-    resetTimer() {
-        ; 
+    get startButtonVisible() {
+        this.startStopButton.classList.contains("start")
+    }
+
+    start() {
+        this.startButtonVisible = false;
+        replaceClass(this.startStopButton, 'start', 'stop');
+
+    }
+
+    stop() {
+        this.startButtonVisible = true;
+        replaceClass(this.startStopButton, 'stop', 'start');
+    }
+
+    reset() {
+        this.presentValue = this.initialValue; 
     }
 }
 
 //25 minutes in miliseconds
-const timerValue = 25*60*1000;
+const timerInitialValue = 25*60*1000;
 
 const startStopButton = document.getElementById('start-stop');
 const resetButton = document.getElementById('reset');
 
-const timer = new Timer(timerValue, startStopButton, resetButton);
+const timer = new Timer(timerInitialValue, startStopButton, resetButton);
 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());
+
+function replaceClass(element, fromClass, toClass) {
+    element.classList.remove(fromClass);
+    element.classList.add(toClass);
+}
