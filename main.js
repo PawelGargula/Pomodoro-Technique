@@ -27,14 +27,28 @@ class Timer {
 
     updateClock() {
         this.presentValue = this.presentValue - 1000;
-        this.clock.innerHTML = convertMiliseconds(this.presentValue);
+        this.clock.innerHTML = convert(this.presentValue);
             
         if (this.presentValue < 1) {
+            this.playAlarm();
             this.stop();
             this.counter++;
             this.counterElement.innerHTML = "Counter: " + this.counter;
             this.presentValue = this.initialValue;
         }
+    }
+
+    playAlarm() {
+        let audio = new Audio('sound/alarm.flac'); /* sound from https://freesound.org/s/22627/ */
+        audio.play();
+        let times = 1;
+        let x = setInterval(() => {
+            audio.play();
+            times++;
+            if (times === 3) {
+                clearInterval(x);
+            }
+        }, 2000);
     }
 
     stop() {
@@ -46,7 +60,7 @@ class Timer {
     reset() {
         this.stop();
         this.presentValue = this.initialValue;
-        this.clock.innerHTML = convertMiliseconds(this.initialValue);
+        this.clock.innerHTML = convert(this.initialValue);
     }
 }
 
@@ -63,7 +77,7 @@ const timer = new Timer(timerInitialValue, clock, startStopButton, resetButton, 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());
 
-function convertMiliseconds(miliseconds) {
+function convert(miliseconds) {
     let minutes = Math.floor((miliseconds % (1000 * 60 * 60)) / (1000 * 60));
     if (minutes < 10) {
         minutes = "0" + minutes;
