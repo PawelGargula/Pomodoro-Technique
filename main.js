@@ -1,10 +1,11 @@
 class Timer {
-    constructor(initialValue, clock, startStopButton, resetButton, counterElement) {
+    constructor(initialValue, clock, startStopButton, resetButton, counterElement, message) {
         this.initialValue = initialValue;
         this.clock = clock;
         this.startStopButton = startStopButton;
         this.resetButton = resetButton;
         this.counterElement = counterElement;
+        this.message = message;
         this.presentValue = initialValue;
         this.counter = 1;
         this.clockUpdater;
@@ -20,6 +21,7 @@ class Timer {
     }
 
     start() {
+        this.message.innerHTML = "Message";
         replaceClass(this.startStopButton, 'start', 'stop');
         this.startStopButton.innerHTML = "Stop";
         this.clockUpdater = setInterval(() => this.updateClock(), 1000);
@@ -41,14 +43,15 @@ class Timer {
 
     playAlarm() {
         let audio = new Audio('sound/alarm.flac'); /* sound from https://freesound.org/s/22627/ */
-        let times = 0;
+        audio.play();
+        let times = 1;
         let x = setInterval(() => {
             audio.play();
             times++;
             if (times === 3) {
                 clearInterval(x);
             }
-        }, 1700);
+        }, 1500);
     }
 
     stop() {
@@ -59,11 +62,11 @@ class Timer {
 
     showMessage() {
         if (this.counter > 4) {
-            console.log("Time for long break (15-30min)");
+            this.message.innerHTML = "Time for long break (15-30min)";
             this.counter = 1;
         }
         else {
-            console.log("Time for short break (3-5min)");
+            this.message.innerHTML = "Time for short break (3-5min)";
         }
     }
 
@@ -75,14 +78,15 @@ class Timer {
 }
 
 //25 minutes in miliseconds
-const timerInitialValue = 25*60*1000;
+const timerInitialValue = 5000;
 
 const clock = document.getElementById('clock');
 const startStopButton = document.getElementById('start-stop');
 const resetButton = document.getElementById('reset');
 const counterElement = document.getElementById('counter');
+const message = document.getElementById('message');
 
-const timer = new Timer(timerInitialValue, clock, startStopButton, resetButton, counterElement);
+const timer = new Timer(timerInitialValue, clock, startStopButton, resetButton, counterElement, message);
 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());

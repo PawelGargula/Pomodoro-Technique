@@ -109,6 +109,11 @@ button.reset:hover, button.reset:focus {
     letter-spacing: 1px;
 }
 
+.message {
+    min-height: 20px;
+    letter-spacing: 1px;     
+}
+
 .footer {
     letter-spacing: 1px;
     border: 1px solid #cd212a;
