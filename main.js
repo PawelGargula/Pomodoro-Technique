@@ -78,7 +78,7 @@ class Timer {
 }
 
 //25 minutes in miliseconds
-const timerInitialValue = 5000;
+const timerInitialValue = 25*60*1000;
 
 const clock = document.getElementById('clock');
 const startStopButton = document.getElementById('start-stop');
