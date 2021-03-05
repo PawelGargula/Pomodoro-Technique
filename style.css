@@ -34,9 +34,10 @@ body {
 }
 
 .page-logo {
+    font-size: 3.5vh;
     letter-spacing: 2px;
     border: 2px solid #008c45;
-    padding: 10px;
+    padding: 1vw;
 }
 
 .info {
@@ -57,19 +58,19 @@ body {
 }
 
 .timer-logo {
-    font-size: 1.2em;
+    font-size: 3vh;
 }
 
 .clock {
-    font-size: 5em;
+    font-size: 10vh;
 }
 
 button {
     display: block;
-    margin: 5px 0;
+    margin: 0.5vh 0;
     width: 100%;
     background-color: #f4f5f0;
-    font-size: 1.4em;
+    font-size: 2.5vh;
     cursor: pointer;
     transition-duration: 0.5s;
     border-radius: 5%;
@@ -106,16 +107,18 @@ button.reset:hover, button.reset:focus {
 }
 
 .counter {
+    font-size: 2vh;
     letter-spacing: 1px;
 }
 
 .message {
-    min-height: 20px;
+    font-size: 2vh;
     letter-spacing: 1px;     
 }
 
 .footer {
+    font-size: 1.7vh;
     letter-spacing: 1px;
     border: 1px solid #cd212a;
-    padding: 5px;
+    padding: 0.5em;
 }
