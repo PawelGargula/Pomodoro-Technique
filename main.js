@@ -6,7 +6,7 @@ class Timer {
         this.resetButton = resetButton;
         this.counterElement = counterElement;
         this.presentValue = initialValue;
-        this.counter = 0;
+        this.counter = 1;
         this.clockUpdater;
     }
     
@@ -23,38 +23,48 @@ class Timer {
         replaceClass(this.startStopButton, 'start', 'stop');
         this.startStopButton.innerHTML = "Stop";
         this.clockUpdater = setInterval(() => this.updateClock(), 1000);
+        this.counterElement.innerHTML = "Counter: " + this.counter;
     }
 
     updateClock() {
         this.presentValue = this.presentValue - 1000;
         this.clock.innerHTML = convert(this.presentValue);
             
-        if (this.presentValue < 1) {
+        if (this.presentValue === 0) {
+            this.presentValue = this.initialValue;
             this.playAlarm();
             this.stop();
             this.counter++;
-            this.counterElement.innerHTML = "Counter: " + this.counter;
-            this.presentValue = this.initialValue;
+            this.showMessage();
         }
     }
 
     playAlarm() {
         let audio = new Audio('sound/alarm.flac'); /* sound from https://freesound.org/s/22627/ */
-        audio.play();
-        let times = 1;
+        let times = 0;
         let x = setInterval(() => {
             audio.play();
             times++;
             if (times === 3) {
                 clearInterval(x);
             }
-        }, 2000);
+        }, 1700);
     }
 
     stop() {
         clearInterval(this.clockUpdater);
         replaceClass(this.startStopButton, 'stop', 'start');
         this.startStopButton.innerHTML = "Start";
+    }
+
+    showMessage() {
+        if (this.counter > 4) {
+            console.log("Time for long break (15-30min)");
+            this.counter = 1;
+        }
+        else {
+            console.log("Time for short break (3-5min)");
+        }
     }
 
     reset() {
