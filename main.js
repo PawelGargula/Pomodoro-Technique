@@ -1,14 +1,16 @@
 class Timer {
-    constructor(initialValue, clock, startStopButton, resetButton, counterElement, message) {
-        this.initialValue = initialValue;
-        this.clock = clock;
+    constructor(minutes, seconds, startStopButton, resetButton, counterElement, message) {
+        this.minutesElement = minutesElement;
+        this.secondsElement = secondsElement;
         this.startStopButton = startStopButton;
         this.resetButton = resetButton;
         this.counterElement = counterElement;
         this.message = message;
-        this.presentValue = initialValue;
         this.counter = 1;
         this.clockUpdater;
+        this.presentTime;
+        this.endTime;
+        this.distanceToEnd;
     }
     
     startStop() {
@@ -24,25 +26,28 @@ class Timer {
         this.message.innerHTML = "Message";
         replaceClass(this.startStopButton, 'start', 'stop');
         this.startStopButton.innerHTML = "Stop";
-        this.clockUpdater = setInterval(() => this.updateClock(), 1000);
-        this.counterElement.innerHTML = "Counter: " + this.counter;
+        this.presentTime = new Date().getTime();
+        this.endTime = this.presentTime + toMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText));
+        this.clockUpdater = setInterval(() => this.updateTimer(), 1000);
     }
 
-    updateClock() {
-        this.presentValue = this.presentValue - 1000;
-        this.clock.innerHTML = convert(this.presentValue);
-            
-        if (this.presentValue === 0) {
-            this.presentValue = this.initialValue;
-            this.playAlarm();
-            this.stop();
+    updateTimer() {
+        this.presentTime = new Date().getTime();
+        this.distanceToEnd = this.endTime - this.presentTime;
+        this.minutesElement.innerHTML = toMinutes(this.distanceToEnd);
+        this.secondsElement.innerHTML = toSeconds(this.distanceToEnd);
+        
+        if (this.distanceToEnd < 0) {
             this.counter++;
+            this.playAlarm();
+            this.reset();
             this.showMessage();
+            this.counterElement.innerHTML = "Counter: " + this.counter;
         }
     }
 
     playAlarm() {
-        let audio = new Audio('sound/alarm.flac'); /* sound from https://freesound.org/s/22627/ */
+        let audio = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
         audio.play();
         let times = 1;
         let x = setInterval(() => {
@@ -72,37 +77,42 @@ class Timer {
 
     reset() {
         this.stop();
-        this.presentValue = this.initialValue;
-        this.clock.innerHTML = convert(this.initialValue);
+        this.minutesElement.innerHTML = "25";
+        this.secondsElement.innerHTML = "00";
     }
 }
 
-//25 minutes in miliseconds
-const timerInitialValue = 25*60*1000;
-
-const clock = document.getElementById('clock');
+const minutesElement = document.getElementById('minutes');
+const secondsElement = document.getElementById('seconds');
 const startStopButton = document.getElementById('start-stop');
 const resetButton = document.getElementById('reset');
 const counterElement = document.getElementById('counter');
 const message = document.getElementById('message');
 
-const timer = new Timer(timerInitialValue, clock, startStopButton, resetButton, counterElement, message);
+const timer = new Timer(minutesElement, secondsElement, startStopButton, resetButton, counterElement, message);
 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());
 
-function convert(miliseconds) {
+function toMiliseconds(minutes, seconds) {
+    let miliseconds = (minutes*60 + seconds)*1000;
+    return miliseconds;
+}
+
+function toMinutes(miliseconds) {
     let minutes = Math.floor((miliseconds % (1000 * 60 * 60)) / (1000 * 60));
     if (minutes < 10) {
         minutes = "0" + minutes;
     }
+    return minutes;
+}
 
-    let seconds = Math.floor((miliseconds % (1000 * 60)) / 1000);
+function toSeconds(miliseconds) {
+    let seconds = Math.ceil((miliseconds % (1000 * 60)) / 1000);
     if (seconds < 10) {
         seconds = "0" + seconds;
     }
-
-    return minutes + ":" + seconds;
+    return seconds;
 }
 
 function replaceClass(element, fromClass, toClass) {
