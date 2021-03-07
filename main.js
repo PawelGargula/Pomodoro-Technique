@@ -27,7 +27,7 @@ class Timer {
         replaceClass(this.startStopButton, 'start', 'stop');
         this.startStopButton.innerHTML = "Stop";
         this.presentTime = new Date().getTime();
-        this.endTime = this.presentTime + toMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText));
+        this.endTime = 30 + this.presentTime + toMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText)); //Give a few miliseconds for program so then it can update clock correct after first second from start
         this.clockUpdater = setInterval(() => this.updateTimer(), 1000);
     }
 
