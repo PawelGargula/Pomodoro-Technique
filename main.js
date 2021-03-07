@@ -108,7 +108,7 @@ function toMinutes(miliseconds) {
 }
 
 function toSeconds(miliseconds) {
-    let seconds = Math.ceil((miliseconds % (1000 * 60)) / 1000);
+    let seconds = Math.floor((miliseconds % (1000 * 60)) / 1000);
     if (seconds < 10) {
         seconds = "0" + seconds;
     }
