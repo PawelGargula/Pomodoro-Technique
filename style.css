@@ -37,7 +37,7 @@ body {
     font-size: 3.5vh;
     letter-spacing: 2px;
     border: 2px solid #008c45;
-    padding: 1vw;
+    padding: 1vh 1vw;
 }
 
 .info {
@@ -120,5 +120,5 @@ button.reset:hover, button.reset:focus {
     font-size: 1.7vh;
     letter-spacing: 1px;
     border: 1px solid #cd212a;
-    padding: 0.5em;
+    padding: 0.5vh 0.5vw;
 }
