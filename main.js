@@ -1,7 +1,8 @@
 class Timer {
-    constructor(minutesInitialValue, secondsInitialValue, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement) {
+    constructor(minutesInitialValue, secondsInitialValue, clock, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement) {
         this.minutesInitialValue = minutesInitialValue;
         this.secondsInitialValue = secondsInitialValue;
+        this.clock = clock;
         this.minutesElement = minutesElement;
         this.secondsElement = secondsElement;
         this.startStopButton = startStopButton;
@@ -43,7 +44,8 @@ class Timer {
 
     updateTimer() {
         this.calculeteDistanceToTimeEnd();
-        this.updateClock()
+        this.updateClock();
+        document.title = this.clock.innerText + " - Pomodoro Timer";
 
         if (this.distanceToTimeEnd < 0) {
             this.counter++;
@@ -96,11 +98,13 @@ class Timer {
     stop() {
         clearInterval(this.timerUpdater);
         this.updateStartStopButton('stop', 'start');
+        document.title = "Pomodoro Technique";
     }
 }
 
 const minutesInitialValue = "25";
 const secondsInitialValue = "00";
+const clock = document.getElementById('clock');
 const minutesElement = document.getElementById('minutes');
 const secondsElement = document.getElementById('seconds');
 const startStopButton = document.getElementById('start-stop');
@@ -108,7 +112,7 @@ const resetButton = document.getElementById('reset');
 const counterElement = document.getElementById('counter');
 const messageElement = document.getElementById('message');
 
-const timer = new Timer(minutesInitialValue, secondsInitialValue, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement);
+const timer = new Timer(minutesInitialValue, secondsInitialValue, clock, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement);
 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());
