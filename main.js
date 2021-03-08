@@ -1,14 +1,15 @@
 class Timer {
-    constructor(minutesInitialValue, secondsInitialValue, clock, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement) {
+    constructor(minutesInitialValue, secondsInitialValue, clockElement, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement, audio) {
         this.minutesInitialValue = minutesInitialValue;
         this.secondsInitialValue = secondsInitialValue;
-        this.clock = clock;
+        this.clockElement = clockElement;
         this.minutesElement = minutesElement;
         this.secondsElement = secondsElement;
         this.startStopButton = startStopButton;
         this.resetButton = resetButton;
         this.counterElement = counterElement;
         this.messageElement = messageElement;
+        this.audio = audio;
         this.counter = 1;
         this.timerUpdater;
         this.presentTime;
@@ -39,13 +40,13 @@ class Timer {
 
     calculateWhenTimeEnd() {
         this.presentTime = new Date().getTime();
-        this.timeEnd = this.presentTime + toMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText)) + 30; //Give a few miliseconds for program so then it can update clock correct after first second from start
+        this.timeEnd = this.presentTime + toMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText)) + 30; //Give a few miliseconds for program so then it can update clockElement correct after first second from start
     }
 
     updateTimer() {
         this.calculeteDistanceToTimeEnd();
         this.updateClock();
-        document.title = this.clock.innerText + " - Pomodoro Timer";
+        document.title = this.clockElement.innerText + " - Pomodoro Timer";
 
         if (this.distanceToTimeEnd < 0) {
             this.counter++;
@@ -67,11 +68,10 @@ class Timer {
     }
 
     playAlarm() {
-        let audio = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
-        audio.play();
+        this.audio.play();
         let playedTimes = 1;
         let x = setInterval(() => {
-            audio.play();
+            this.audio.play();
             playedTimes++;
             if (playedTimes === 3) {
                 clearInterval(x);
@@ -104,15 +104,16 @@ class Timer {
 
 const minutesInitialValue = "25";
 const secondsInitialValue = "00";
-const clock = document.getElementById('clock');
+const clockElement = document.getElementById('clock');
 const minutesElement = document.getElementById('minutes');
 const secondsElement = document.getElementById('seconds');
 const startStopButton = document.getElementById('start-stop');
 const resetButton = document.getElementById('reset');
 const counterElement = document.getElementById('counter');
 const messageElement = document.getElementById('message');
+const audio = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
 
-const timer = new Timer(minutesInitialValue, secondsInitialValue, clock, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement);
+const timer = new Timer(minutesInitialValue, secondsInitialValue, clockElement, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement, audio);
 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());
