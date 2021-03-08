@@ -1,5 +1,5 @@
 class Timer {
-    constructor(minutesInitialValue, secondsInitialValue, clockElement, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement, audio) {
+    constructor(minutesInitialValue, secondsInitialValue, clockElement, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement) {
         this.minutesInitialValue = minutesInitialValue;
         this.secondsInitialValue = secondsInitialValue;
         this.clockElement = clockElement;
@@ -9,7 +9,7 @@ class Timer {
         this.resetButton = resetButton;
         this.counterElement = counterElement;
         this.messageElement = messageElement;
-        this.audio = audio;
+        this.audio = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/;
         this.counter = 1;
         this.timerUpdater;
         this.presentTime;
@@ -111,9 +111,8 @@ const startStopButton = document.getElementById('start-stop');
 const resetButton = document.getElementById('reset');
 const counterElement = document.getElementById('counter');
 const messageElement = document.getElementById('message');
-const audio = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
 
-const timer = new Timer(minutesInitialValue, secondsInitialValue, clockElement, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement, audio);
+const timer = new Timer(minutesInitialValue, secondsInitialValue, clockElement, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement);
 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());
