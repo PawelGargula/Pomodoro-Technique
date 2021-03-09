@@ -40,7 +40,7 @@ class Timer {
 
     calculateWhenTimeEnd() {
         this.presentTime = new Date().getTime();
-        this.timeEnd = this.presentTime + toMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText)) + 30; //Give a few miliseconds for program so then it can update clockElement correct after first second from start
+        this.timeEnd = this.presentTime + countMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText)) + 30; //Give a few miliseconds for program so then it can update clockElement correct after first second from start
     }
 
     updateTimer() {
@@ -63,8 +63,10 @@ class Timer {
     }
 
     updateClock() {
-        this.minutesElement.innerText = toMinutes(this.distanceToTimeEnd);
-        this.secondsElement.innerText = toSeconds(this.distanceToTimeEnd);
+        let minutes = countMinutesOnClock(this.distanceToTimeEnd);
+        let seconds = countSecondsOnClock(this.distanceToTimeEnd);
+        this.minutesElement.innerText = (minutes < 10) ? "0" + minutes : minutes;
+        this.secondsElement.innerText = (seconds < 10) ? "0" + seconds : seconds;
     }
 
     playAlarm() {
@@ -117,23 +119,8 @@ const timer = new Timer(minutesInitialValue, secondsInitialValue, clockElement, 
 startStopButton.addEventListener('click', () => timer.startStop());
 resetButton.addEventListener('click', () => timer.reset());
 
-function toMiliseconds(minutes, seconds) {
-    let miliseconds = (minutes*60 + seconds)*1000;
-    return miliseconds;
-}
+const countMiliseconds = (minutes, seconds) => (minutes*60 + seconds)*1000;
 
-function toSeconds(miliseconds) {
-    let seconds = Math.floor((miliseconds % (1000 * 60)) / 1000);
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-    return seconds;
-}
+const countSecondsOnClock = miliseconds => Math.floor((miliseconds % (1000*60)) / 1000);
 
-function toMinutes(miliseconds) {
-    let minutes = Math.floor((miliseconds % (1000 * 60 * 60)) / (1000 * 60));
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-    return minutes;
-}
+const countMinutesOnClock = miliseconds => Math.floor((miliseconds % (1000*60*60)) / (1000*60));
