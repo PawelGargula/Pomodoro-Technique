@@ -28,13 +28,13 @@ class Timer {
 
     start() {
         this.messageElement.innerText = "Message";
-        this.updateStartStopButton('start', 'stop');
+        this.updateStartStopButton("stop");
         this.calculateWhenTimeEnd();
         this.timerUpdater = setInterval(() => this.updateTimer(), 1000);
     }
 
-    updateStartStopButton(from, to) {
-        replaceClass(this.startStopButton, from, to)
+    updateStartStopButton(to) {
+        this.startStopButton.setAttribute("class", to);
         this.startStopButton.innerText = to.charAt(0).toUpperCase() + to.slice(1);
     }
 
@@ -97,7 +97,7 @@ class Timer {
 
     stop() {
         clearInterval(this.timerUpdater);
-        this.updateStartStopButton('stop', 'start');
+        this.updateStartStopButton("start");
         document.title = "Pomodoro Technique";
     }
 }
@@ -136,9 +136,4 @@ function toMinutes(miliseconds) {
         minutes = "0" + minutes;
     }
     return minutes;
-}
-
-function replaceClass(element, fromClass, toClass) {
-    element.classList.remove(fromClass);
-    element.classList.add(toClass);
 }
