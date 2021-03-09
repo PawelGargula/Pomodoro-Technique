@@ -27,7 +27,7 @@ class Timer {
     }
 
     start() {
-        this.messageElement.innerHTML = "Message";
+        this.messageElement.innerText = "Message";
         this.updateStartStopButton('start', 'stop');
         this.calculateWhenTimeEnd();
         this.timerUpdater = setInterval(() => this.updateTimer(), 1000);
@@ -35,7 +35,7 @@ class Timer {
 
     updateStartStopButton(from, to) {
         replaceClass(this.startStopButton, from, to)
-        this.startStopButton.innerHTML = to.charAt(0).toUpperCase() + to.slice(1);
+        this.startStopButton.innerText = to.charAt(0).toUpperCase() + to.slice(1);
     }
 
     calculateWhenTimeEnd() {
@@ -53,7 +53,7 @@ class Timer {
             this.playAlarm();
             this.showMessage();
             this.reset();
-            this.counterElement.innerHTML = "Counter: " + this.counter;
+            this.counterElement.innerText = "Counter: " + this.counter;
         }
     }
 
@@ -63,8 +63,8 @@ class Timer {
     }
 
     updateClock() {
-        this.minutesElement.innerHTML = toMinutes(this.distanceToTimeEnd);
-        this.secondsElement.innerHTML = toSeconds(this.distanceToTimeEnd);
+        this.minutesElement.innerText = toMinutes(this.distanceToTimeEnd);
+        this.secondsElement.innerText = toSeconds(this.distanceToTimeEnd);
     }
 
     playAlarm() {
@@ -81,18 +81,18 @@ class Timer {
 
     showMessage() {
         if (this.counter > 4) {
-            this.messageElement.innerHTML = "Time for long break (15-30min)";
+            this.messageElement.innerText = "Time for long break (15-30min)";
             this.counter = 1;
         }
         else {
-            this.messageElement.innerHTML = "Time for short break (3-5min)";
+            this.messageElement.innerText = "Time for short break (3-5min)";
         }
     }
 
     reset() {
         this.stop();
-        this.minutesElement.innerHTML = this.minutesInitialValue;
-        this.secondsElement.innerHTML = this.secondsInitialValue;
+        this.minutesElement.innerText = this.minutesInitialValue;
+        this.secondsElement.innerText = this.secondsInitialValue;
     }
 
     stop() {
