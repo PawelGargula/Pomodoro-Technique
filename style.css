@@ -11,10 +11,10 @@ body {
 }
 
 .full-screen-container {
-    background-color: var(--italian-white-color);
-    width: 100vw;
-    height: 100vh;
     display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--italian-white-color);
 }
 
 .full-screen-container::before {
@@ -38,17 +38,18 @@ body {
 }
 
 .page-logo {
+    margin-bottom: 0;
     font-size: 3.5vh;
     letter-spacing: 2px;
-    border: 2px solid var(--italian-green-color);
     padding: 1vh 1vw;
+    border: 2px solid var(--italian-green-color);
 }
 
 .info {
-    color: var(--font-color);
-    text-decoration: none;
     font-size: 0.5em;
     font-weight: normal;
+    color: var(--font-color);
+    text-decoration: none;
 }
 
 .info:hover {
@@ -62,23 +63,30 @@ body {
 }
 
 .timer-logo {
+    margin-top: 0;
+    background-color: hsla(9, 100%, 64%, 0.2);
     font-size: 2vh;
+    padding: 0.5vh 0.5vw;
+    border: 1px solid var(--font-color);
 }
 
 .clock {
-    font-size: 10vh;
+    font-size: 15vh;
 }
 
 button {
     display: block;
     width: 100%;
     margin: 0.5vh 0;
-    font-size: 2.5vh;
-    background-color: var(--italian-white-color);
+    font-size: 3vh;
     border: 2px solid var(--font-color);
     border-radius: 5%;
     cursor: pointer;
     transition-duration: 0.3s;
+}
+
+button:focus {
+    outline: none;
 }
 
 button.start {
@@ -106,18 +114,18 @@ button.reset:hover, button.reset:focus {
 }
 
 .counter {
-    font-size: 2vh;
+    font-size: 3vh;
     letter-spacing: 1px;
 }
 
 .message {
-    font-size: 2vh;
+    font-size: 3vh;
     letter-spacing: 1px;     
 }
 
 .footer {
     font-size: 1.7vh;
     letter-spacing: 1px;
-    border: 1px solid var(--italian-red-color);
     padding: 0.5vh 0.5vw;
+    border: 1px solid var(--italian-red-color);
 }
