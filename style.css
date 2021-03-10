@@ -6,6 +6,7 @@ body {
     margin: 0;
     --italian-green-color: 	hsl(150, 100%, 27%);
     --italian-white-color: hsl(72, 20%, 95%);
+    --darker-italian-white-color: hsl(72, 20%, 92%);
     --italian-red-color: hsl(357, 72%, 47%);
     --font-color: hsl(288, 80%, 5%);
 }
@@ -64,7 +65,7 @@ body {
 
 .timer-logo {
     margin-top: 0;
-    background-color: hsla(9, 100%, 64%, 0.2);
+    background-color: var(--darker-italian-white-color);
     font-size: 2vh;
     letter-spacing: 1px;
     padding: 0.5vh 0.5vw;
@@ -79,9 +80,9 @@ body {
 }
 
 .clock {
-    background-color: var(--italian-white-color);
-    font-size: 13vh;
-    padding: 0 4vw;
+    background-color: var(--darker-italian-white-color);git 
+    font-size: 12vh;
+    padding: 0 3vw;
     border-radius: 14vh;
 }
 
