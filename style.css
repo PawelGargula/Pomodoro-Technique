@@ -4,6 +4,7 @@
 
 body {
     margin: 0;
+     font-family: 'Major Mono Display', monospace;
     --italian-green-color: 	hsl(150, 100%, 27%);
     --italian-white-color: hsl(72, 20%, 95%);
     --darker-italian-white-color: hsl(72, 20%, 92%);
@@ -75,15 +76,16 @@ body {
 .tomato {
     margin: 2vh 0;
     background-color: tomato;
-    padding: 10%;
+    padding: 5vh 3vw;
     border-radius: 40%;
 }
 
 .clock {
     background-color: var(--darker-italian-white-color); 
     font-size: 12vh;
-    padding: 0 3vw;
-    border-radius: 14vh;
+    padding: 0 2vh;
+    border: 1px solid var(--font-color);
+    border-radius: 20%;
 }
 
 button {
