@@ -80,6 +80,7 @@ body {
 }
 
 .clock {
+    display: flex;
     background-color: var(--darker-italian-white-color); 
     font-family: 'Courier New', Courier, monospace;
     font-size: 11vh;
