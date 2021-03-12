@@ -11,12 +11,6 @@ body {
     --font-color: hsl(288, 80%, 5%);
 }
 
-.shadow {
-    -webkit-box-shadow: 1px 0px 5px 0px rgba(50, 50, 50, 1);
-    -moz-box-shadow:    1px 0px 5px 0px rgba(50, 50, 50, 1);
-    box-shadow:         1px 0px 5px 0px rgba(50, 50, 50, 1);
-}
-
 .full-screen-container {
     display: flex;
     height: 100vh;
@@ -101,6 +95,9 @@ button {
     border-radius: 5%;
     cursor: pointer;
     transition-duration: 0.3s;
+    -webkit-box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    1px 0px 10px 0px rgba(50, 50, 50, 1);
+    box-shadow:         1px 0px 10px 0px rgba(50, 50, 50, 1);
 }
 
 button:focus {
