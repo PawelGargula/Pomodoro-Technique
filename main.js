@@ -60,7 +60,7 @@ class CountdownTimer {
         alarm.play();
         let count = 1;
         alarm.onended = function() {
-            if(count < 3) {
+            if (count < 3) {
                 count++;
                 this.play();
             }
