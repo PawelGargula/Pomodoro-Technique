@@ -1,22 +1,15 @@
-class Timer {
-    constructor(minutesInitialValue, secondsInitialValue, clockElement, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement) {
-        this.minutesInitialValue = minutesInitialValue;
-        this.secondsInitialValue = secondsInitialValue;
-        this.clockElement = clockElement;
-        this.minutesElement = minutesElement;
-        this.secondsElement = secondsElement;
+class CountdownTimer {
+    constructor(startStopButton, resetButton) {
         this.startStopButton = startStopButton;
         this.resetButton = resetButton;
-        this.counterElement = counterElement;
-        this.messageElement = messageElement;
-        this.audio = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/;
-        this.counter = 1;
+        this.minutesElement = document.getElementById('minutes');
+        this.secondsElement = document.getElementById('seconds');
+        this.minutesInitialValue = "25";
+        this.secondsInitialValue = "00";
         this.timerUpdater;
-        this.presentTime;
-        this.timeEnd;
-        this.distanceToTimeEnd;
+        this.counter = 1;
     }
-    
+
     startStop() {
         if (this.startStopButton.classList.contains("start")) {
             this.start();
@@ -27,10 +20,11 @@ class Timer {
     }
 
     start() {
-        this.messageElement.innerText = "Message";
-        this.updateStartStopButton("stop");
-        this.calculateWhenTimeEnd();
-        this.timerUpdater = setInterval(() => this.updateTimer(), 1000);
+        document.getElementById('message').innerText = "Message";
+        this.updateStartStopButton('stop');
+        //Give a few miliseconds for program so then it can update clockElement correct after first second from start
+        let timeEnd = this.presentTime + countMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText)) + 30; 
+        this.timerUpdater = setInterval(() => this.updateTimer(timeEnd), 1000);
     }
 
     updateStartStopButton(to) {
@@ -38,56 +32,48 @@ class Timer {
         this.startStopButton.innerText = to.charAt(0).toUpperCase() + to.slice(1);
     }
 
-    calculateWhenTimeEnd() {
-        this.presentTime = new Date().getTime();
-        this.timeEnd = this.presentTime + countMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText)) + 30; //Give a few miliseconds for program so then it can update clockElement correct after first second from start
+    get presentTime() {
+        return new Date().getTime();
     }
 
-    updateTimer() {
-        this.calculeteDistanceToTimeEnd();
-        this.updateClock();
-        document.title = this.clockElement.innerText + " - Pomodoro Timer";
+    updateTimer(timeEnd) {
+        let distanceToTimeEnd = timeEnd - this.presentTime;
+        this.updateClock(distanceToTimeEnd);
+        document.title = `${document.getElementById('clock').innerText} - Pomodoro Timer`;
 
-        if (this.distanceToTimeEnd < 0) {
+        if (distanceToTimeEnd < 0) {
             this.counter++;
             this.playAlarm();
             this.showMessage();
             this.reset();
-            this.counterElement.innerText = "Counter: " + this.counter;
+            document.getElementById('counter').innerText = `Counter: ${this.counter}`;
         }
     }
 
-    calculeteDistanceToTimeEnd() {
-        this.presentTime = new Date().getTime();
-        this.distanceToTimeEnd = this.timeEnd - this.presentTime;
-    }
-
-    updateClock() {
-        let minutes = countMinutesOnClock(this.distanceToTimeEnd);
-        let seconds = countSecondsOnClock(this.distanceToTimeEnd);
-        this.minutesElement.innerText = (minutes < 10) ? "0" + minutes : minutes;
-        this.secondsElement.innerText = (seconds < 10) ? "0" + seconds : seconds;
+    updateClock(distanceToTimeEnd) {
+        this.minutesElement.innerText = convertToMinutesForClock(distanceToTimeEnd);
+        this.secondsElement.innerText = convertToSecondsForClock(distanceToTimeEnd);
     }
 
     playAlarm() {
-        this.audio.play();
-        let playedTimes = 1;
-        let x = setInterval(() => {
-            this.audio.play();
-            playedTimes++;
-            if (playedTimes === 3) {
-                clearInterval(x);
+        let alarm = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
+        alarm.play();
+        let count = 1;
+        alarm.onended = function() {
+            if(count < 3) {
+                count++;
+                this.play();
             }
-        }, 1500);
+        }
     }
 
     showMessage() {
         if (this.counter > 4) {
-            this.messageElement.innerText = "Time for long break (15-30min)";
+            document.getElementById('message').innerText = "Time for long break (15-30min)";
             this.counter = 1;
         }
         else {
-            this.messageElement.innerText = "Time for short break (3-5min)";
+            document.getElementById('message').innerText = "Time for short break (3-5min)";
         }
     }
 
@@ -104,23 +90,27 @@ class Timer {
     }
 }
 
-const minutesInitialValue = "25";
-const secondsInitialValue = "00";
-const clockElement = document.getElementById('clock');
-const minutesElement = document.getElementById('minutes');
-const secondsElement = document.getElementById('seconds');
-const startStopButton = document.getElementById('start-stop');
-const resetButton = document.getElementById('reset');
-const counterElement = document.getElementById('counter');
-const messageElement = document.getElementById('message');
+main();
 
-const timer = new Timer(minutesInitialValue, secondsInitialValue, clockElement, minutesElement, secondsElement, startStopButton, resetButton, counterElement, messageElement);
+function main() {
+    const startStopButton = document.getElementById('start-stop');
+    const resetButton = document.getElementById('reset');
+    const countdownTimer = new CountdownTimer(startStopButton, resetButton);
+    startStopButton.addEventListener('click', () => countdownTimer.startStop());
+    resetButton.addEventListener('click', () => countdownTimer.reset());
+}
 
-startStopButton.addEventListener('click', () => timer.startStop());
-resetButton.addEventListener('click', () => timer.reset());
+function countMiliseconds(minutes, seconds) {
+    let miliseconds = (minutes*60 + seconds)*1000;
+    return miliseconds;
+}
 
-const countMiliseconds = (minutes, seconds) => (minutes*60 + seconds)*1000;
+function convertToMinutesForClock(miliseconds) {
+    let minutes = Math.floor((miliseconds % (1000*60*60)) / (1000*60));
+    return (minutes < 10) ? `0${minutes}` : minutes;
+}
 
-const countSecondsOnClock = miliseconds => Math.floor((miliseconds % (1000*60)) / 1000);
-
-const countMinutesOnClock = miliseconds => Math.floor((miliseconds % (1000*60*60)) / (1000*60));
+function convertToSecondsForClock(miliseconds) {
+    let seconds = Math.floor((miliseconds % (1000*60)) / 1000);
+    return (seconds < 10) ? `0${seconds}` : seconds;
+}
