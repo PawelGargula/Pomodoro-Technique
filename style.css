@@ -75,7 +75,7 @@ body {
 .clock {
     margin: 2vh 0;
     display: flex;
-    background-color: hsl(9, 100%, 64%);
+    background-color: tomato;
     color: var(--font-color);
     font-family: 'Courier New', Courier, monospace;
     font-size: 11vh;
