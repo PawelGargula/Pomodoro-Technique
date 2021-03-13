@@ -1,7 +1,17 @@
+class StartStopButton {
+    constructor(element) {
+        this.element = document.getElementById('start-stop');
+    }
+
+    update(to) {
+        this.element.setAttribute("class", to);
+        this.element.innerText = to.charAt(0).toUpperCase() + to.slice(1);
+    }
+}
+
 class CountdownTimer {
-    constructor(startStopButton, resetButton) {
+    constructor(startStopButton) {
         this.startStopButton = startStopButton;
-        this.resetButton = resetButton;
         this.minutesElement = document.getElementById('minutes');
         this.secondsElement = document.getElementById('seconds');
         this.minutesInitialValue = "25";
@@ -11,7 +21,7 @@ class CountdownTimer {
     }
 
     startStop() {
-        if (this.startStopButton.classList.contains("start")) {
+        if (this.startStopButton.element.classList.contains("start")) {
             this.start();
         }
         else {
@@ -21,15 +31,10 @@ class CountdownTimer {
 
     start() {
         document.getElementById('message').innerText = "Message";
-        this.updateStartStopButton('stop');
+        this.startStopButton.update('stop');
         //Give a few miliseconds for program so then it can update clockElement correct after first second from start
         let timeEnd = this.presentTime + countMiliseconds(parseInt(this.minutesElement.innerText), parseInt(this.secondsElement.innerText)) + 30; 
         this.timerUpdater = setInterval(() => this.updateTimer(timeEnd), 1000);
-    }
-
-    updateStartStopButton(to) {
-        this.startStopButton.setAttribute("class", to);
-        this.startStopButton.innerText = to.charAt(0).toUpperCase() + to.slice(1);
     }
 
     get presentTime() {
@@ -85,7 +90,7 @@ class CountdownTimer {
 
     stop() {
         clearInterval(this.timerUpdater);
-        this.updateStartStopButton("start");
+        this.startStopButton.update('start');
         document.title = "Pomodoro Technique";
     }
 }
@@ -93,10 +98,10 @@ class CountdownTimer {
 main();
 
 function main() {
-    const startStopButton = document.getElementById('start-stop');
+    const startStopButton = new StartStopButton();
+    const countdownTimer = new CountdownTimer(startStopButton);
     const resetButton = document.getElementById('reset');
-    const countdownTimer = new CountdownTimer(startStopButton, resetButton);
-    startStopButton.addEventListener('click', () => countdownTimer.startStop());
+    startStopButton.element.addEventListener('click', () => countdownTimer.startStop());
     resetButton.addEventListener('click', () => countdownTimer.reset());
 }
 
