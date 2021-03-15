@@ -2,13 +2,16 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
+:root {
     --italian-green-color: 	hsl(150, 100%, 27%);
     --italian-white-color: hsl(72, 20%, 95%);
     --darker-italian-white-color: hsl(72, 20%, 92%);
     --italian-red-color: hsl(357, 72%, 47%);
     --font-color: hsl(288, 80%, 5%);
+}
+
+body {
+    margin: 0;
 }
 
 .full-screen-container {
