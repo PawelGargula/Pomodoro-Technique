@@ -95,15 +95,12 @@ class CountdownTimer {
     }
 }
 
-main();
+const startStopButton = new StartStopButton();
+const countdownTimer = new CountdownTimer(startStopButton);
+const resetButton = document.getElementById('reset');
+startStopButton.element.addEventListener('click', () => countdownTimer.startStop());
+resetButton.addEventListener('click', () => countdownTimer.reset());
 
-function main() {
-    const startStopButton = new StartStopButton();
-    const countdownTimer = new CountdownTimer(startStopButton);
-    const resetButton = document.getElementById('reset');
-    startStopButton.element.addEventListener('click', () => countdownTimer.startStop());
-    resetButton.addEventListener('click', () => countdownTimer.reset());
-}
 
 function countMiliseconds(minutes, seconds) {
     let miliseconds = (minutes*60 + seconds)*1000;
