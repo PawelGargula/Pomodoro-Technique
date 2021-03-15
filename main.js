@@ -18,6 +18,7 @@ class CountdownTimer {
         this.secondsInitialValue = "00";
         this.timerUpdater;
         this.counter = 1;
+        this.alarm = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
     }
 
     startStop() {
@@ -61,10 +62,9 @@ class CountdownTimer {
     }
 
     playAlarm() {
-        let alarm = new Audio('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
-        alarm.play();
+        this.alarm.play();
         let count = 1;
-        alarm.onended = function() {
+        this.alarm.onended = function() {
             if (count < 3) {
                 count++;
                 this.play();
