@@ -1,5 +1,5 @@
 class StartStopButton {
-    constructor(element) {
+    constructor() {
         this.element = document.getElementById('start-stop');
     }
 
