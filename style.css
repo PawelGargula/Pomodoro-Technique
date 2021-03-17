@@ -78,7 +78,7 @@ body {
 .clock {
     margin: 2vh 0;
     display: flex;
-    background-color: tomato;
+    background-color: hsl(9, 100%, 64%, 0.8);
     color: var(--font-color);
     font-family: 'Courier New', Courier, monospace;
     font-size: 11vh;
@@ -87,9 +87,19 @@ body {
     -webkit-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
     -moz-box-shadow:    1px 0px 20px 0px rgba(50, 50, 50, 1);
     box-shadow:         1px 0px 20px 0px rgba(50, 50, 50, 1);
+    transition-duration: 0.3s;
 }
 
-button {
+.clock:hover, .clock:focus {
+    outline: none;
+    cursor: pointer;
+    background-color: tomato;
+    -webkit-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    1px 0px 30px 0px rgba(50, 50, 50, 1);
+    box-shadow:         1px 0px 30px 0px rgba(50, 50, 50, 1);
+}
+
+.button-group > button {
     display: block;
     width: 100%;
     margin: 1vh 0;
@@ -105,6 +115,12 @@ button {
 
 button:focus {
     outline: none;
+}
+
+button:hover {
+    -webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    1px 0px 15px 0px rgba(50, 50, 50, 1);
+    box-shadow:         1px 0px 15px 0px rgba(50, 50, 50, 1);
 }
 
 button.start {
