@@ -117,7 +117,7 @@ button:focus {
     outline: none;
 }
 
-button:hover {
+button:hover, button:focus {
     -webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
     -moz-box-shadow:    1px 0px 15px 0px rgba(50, 50, 50, 1);
     box-shadow:         1px 0px 15px 0px rgba(50, 50, 50, 1);
