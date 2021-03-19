@@ -4,23 +4,20 @@ class Handle {
     }
 }
 
-class Clock extends Handle {
-    constructor(id) {
-        super(id);
-    }
-}
+class Clock extends Handle {}
 
 class Seconds extends Handle {
-    constructor(id) {
-        super(id);
-    }
     
-    update(value) {
+    updateOnClock(value) {
         this.handle.innerText = (value < 10) ? `0${value}` : value;
     }
     
     countToMiliseconds() {
-        return parseInt(this.handle.innerText, 10) * 1000;
+        let seconds = parseInt(this.handle.innerText, 10);
+        if (isNaN(seconds) || seconds < 0 || seconds > 59) {
+            seconds = 0;
+        } 
+        return seconds * 1000;
     }
     
     countToClockSeconds(miliseconds) {
@@ -28,13 +25,18 @@ class Seconds extends Handle {
     }
 }
 
-class Minutes extends Seconds {
-    constructor(id) {
-        super(id);
+class Minutes extends Handle {
+
+    updateOnClock(value) {
+        this.handle.innerText = (value < 10) ? `0${value}` : value;
     }
     
     countToMiliseconds() {
-        return super.countToMiliseconds() * 60;
+        let minutes = parseInt(this.handle.innerText, 10);
+        if (isNaN(minutes) || minutes < 0 || minutes > 99) {
+            minutes = 25;
+        } 
+        return minutes * 1000 * 60;
     }
     
     countToClockMinutes(miliseconds) {
@@ -43,9 +45,6 @@ class Minutes extends Seconds {
 }
 
 class StartStopButton extends Handle {
-    constructor(id) {
-        super(id);
-    }
     
     updateToStop() {
         this.handle.className = 'stop';
@@ -58,59 +57,56 @@ class StartStopButton extends Handle {
     }
 }
 
-class ResetButton extends Handle {
-    constructor(id) {
-        super(id);
-    }
-}
+class ResetButton extends Handle {}
 
 class Counter extends Handle {
     constructor(id) {
         super(id);
+        this.counter = 1;
     }
 
     update() {
-        if (this.value >= 4) {
+        if (this.counter >= 4) {
             this.handle.innerText = 1;
         } else {
-            this.handle.innerText = parseInt(this.handle.innerText, 10) + 1;
+            this.counter++;
+            this.handle.innerText = this.counter;
         }
-    }
-
-    get value() {
-        return parseInt(this.handle.innerText, 10);
     }
 }
 
-class Message extends Handle {
+class Message extends Handle{
     constructor(id) {
         super(id);
+        this.counter = 1;
     }
 
-    update(counter) {
-        if (counter >= 4) {
-            this.handle.innerText = 'Time for long break (15-30min)';
-        } else {
+    showMessageAboutBreak() {
+        if (this.counter < 4 ) {
+            this.counter++;
             this.handle.innerText = 'Time for short break (3-5min)';
+        } else {
+            this.counter = 1;
+            this.handle.innerText = 'Time for long break (15-30min)';
         }
     }
 
     reset() {
-        this.handle.innerText = "Message";
+        this.handle.innerText = 'Message';
     }
 }
 
 class Alarm {
-    constructor(src) {
-        this.alarm = new Audio(src);
+    constructor(path) {
+        this.alarm = new Audio(path);
     }
 
     play3Times() {
         this.alarm.play();
-        let count = 1;
+        let counter = 1;
         this.alarm.onended = function() {
-            if (count < 3) {
-                count++;
+            if (counter < 3) {
+                counter++;
                 this.play();
             }
         }
@@ -118,8 +114,9 @@ class Alarm {
 }
 
 class CountdownTimer {
-    constructor(startStopButton) {
+    constructor(startStopButton, clock) {
         this.startStopButton = startStopButton;
+        this.clock = clock;
         this.seconds = new Seconds('seconds');
         this.minutes = new Minutes('minutes');
         this.counter = new Counter('counter');
@@ -129,8 +126,8 @@ class CountdownTimer {
         this.timerInterval;
     }
 
-    set(minutesFromUser) {
-        this.minutesFromUser = minutesFromUser;
+    set(minutes) {
+        this.minutesFromUser = minutes;
         this.reset();
     }
 
@@ -158,41 +155,45 @@ class CountdownTimer {
     update(timeEnd) {
         let distanceToTimeEnd = timeEnd - this.now;
         this.updateClock(distanceToTimeEnd);
-        updatePageTitle();
+        this.updatePageTitle();
 
         if (distanceToTimeEnd < 0) {
             this.alarm.play3Times();
-            this.message.update(this.counter.value);
+            this.message.showMessageAboutBreak();
             this.counter.update();
             this.reset();
         }
     }
 
+    updatePageTitle() {
+        document.title = `${clock.handle.innerText} - Pomodoro Timer`;
+    }
+
     updateClock(distanceToTimeEnd) {
         let seconds = this.seconds.countToClockSeconds(distanceToTimeEnd);
-        this.seconds.update(seconds);
+        this.seconds.updateOnClock(seconds);
         let minutes = this.minutes.countToClockMinutes(distanceToTimeEnd);
-        this.minutes.update(minutes);
+        this.minutes.updateOnClock(minutes);
     }
 
     reset() {
-        this.minutes.update(this.minutesFromUser);
-        this.seconds.update(0);
+        this.minutes.updateOnClock(this.minutesFromUser);
+        this.seconds.updateOnClock(0);
         this.stop();
+        this.updatePageTitle();
     }
 
     stop() {
         clearInterval(this.timerInterval);
         this.startStopButton.updateToStart();
-        updatePageTitle();
     }
 
 }
 
 const startStopButton = new StartStopButton('start-stop');
-const countdownTimer = new CountdownTimer(startStopButton);
-const resetButton = new ResetButton('reset');
 const clock = new Clock('clock');
+const countdownTimer = new CountdownTimer(startStopButton, clock);
+const resetButton = new ResetButton('reset');
 
 startStopButton.handle.addEventListener('click', () => countdownTimer.startOrStop());
 
@@ -207,7 +208,3 @@ clock.handle.addEventListener('click', () => {
         countdownTimer.set(minutes);
     }
 });
-
-function updatePageTitle() {
-    document.title = `${clock.handle.innerText} - Pomodoro Timer`;
-}
