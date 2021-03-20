@@ -6,12 +6,13 @@ class Handle {
 
 class Clock extends Handle {}
 
-class Seconds extends Handle {
-    
-    updateOnClock(value) {
+class OnClockValueUpdater extends Handle {
+    updateValueOnClock(value) {
         this.handle.innerText = (value < 10) ? `0${value}` : value;
     }
-    
+}
+
+class Seconds extends OnClockValueUpdater {
     countToMiliseconds() {
         let seconds = parseInt(this.handle.innerText, 10);
         if (isNaN(seconds) || seconds < 0 || seconds > 59) {
@@ -21,16 +22,11 @@ class Seconds extends Handle {
     }
     
     countToClockSeconds(miliseconds) {
-        return Math.floor((miliseconds % (1000*60)) / 1000);
+        return Math.floor((miliseconds % (1000 * 60)) / 1000);
     }
 }
 
-class Minutes extends Handle {
-
-    updateOnClock(value) {
-        this.handle.innerText = (value < 10) ? `0${value}` : value;
-    }
-    
+class Minutes extends OnClockValueUpdater {
     countToMiliseconds() {
         let minutes = parseInt(this.handle.innerText, 10);
         if (isNaN(minutes) || minutes < 0 || minutes > 99) {
@@ -45,7 +41,6 @@ class Minutes extends Handle {
 }
 
 class StartStopButton extends Handle {
-    
     updateToStop() {
         this.handle.className = 'stop';
         this.handle.innerText = 'Stop';
@@ -133,16 +128,15 @@ class CountdownTimer {
 
     startOrStop() {
         if (startStopButton.handle.classList.contains('start')) {
-            this.startStopButton.updateToStop();
-            this.message.reset();
             this.start();
         } else {
-            this.startStopButton.updateToStart();
             this.stop();
         }
     }
 
     start() {
+        this.startStopButton.updateToStop();
+        this.message.reset();
         //Give a few miliseconds for program so then it can update clockElement correct after first second from start
         let timeEnd = this.now + this.minutes.countToMiliseconds() + this.seconds.countToMiliseconds() + 30;
         this.timerInterval = setInterval(() => this.update(timeEnd), 1000);
@@ -171,14 +165,14 @@ class CountdownTimer {
 
     updateClock(distanceToTimeEnd) {
         let seconds = this.seconds.countToClockSeconds(distanceToTimeEnd);
-        this.seconds.updateOnClock(seconds);
+        this.seconds.updateValueOnClock(seconds);
         let minutes = this.minutes.countToClockMinutes(distanceToTimeEnd);
-        this.minutes.updateOnClock(minutes);
+        this.minutes.updateValueOnClock(minutes);
     }
 
     reset() {
-        this.minutes.updateOnClock(this.minutesFromUser);
-        this.seconds.updateOnClock(0);
+        this.minutes.updateValueOnClock(this.minutesFromUser);
+        this.seconds.updateValueOnClock(0);
         this.stop();
         this.updatePageTitle();
     }
