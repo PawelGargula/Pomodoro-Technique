@@ -120,12 +120,7 @@ class CountdownTimer {
         this.minutesFromUser = 25;
         this.timerInterval;
     }
-
-    set(minutes) {
-        this.minutesFromUser = minutes;
-        this.reset();
-    }
-
+ 
     startOrStop() {
         if (startStopButton.handle.classList.contains('start')) {
             this.start();
@@ -133,7 +128,7 @@ class CountdownTimer {
             this.stop();
         }
     }
-
+    
     start() {
         this.startStopButton.updateToStop();
         this.message.reset();
@@ -141,7 +136,7 @@ class CountdownTimer {
         let timeEnd = this.now + this.minutes.countToMiliseconds() + this.seconds.countToMiliseconds() + 30;
         this.timerInterval = setInterval(() => this.update(timeEnd), 1000);
     }
-
+    
     get now() {
         return new Date().getTime();
     }
@@ -150,7 +145,7 @@ class CountdownTimer {
         let distanceToTimeEnd = timeEnd - this.now;
         this.updateClock(distanceToTimeEnd);
         this.updatePageTitle();
-
+        
         if (distanceToTimeEnd < 0) {
             this.alarm.play3Times();
             this.message.showMessageAboutBreak();
@@ -158,30 +153,40 @@ class CountdownTimer {
             this.reset();
         }
     }
-
-    updatePageTitle() {
-        document.title = `${clock.handle.innerText} - Pomodoro Timer`;
-    }
-
+    
     updateClock(distanceToTimeEnd) {
         let seconds = this.seconds.countToClockSeconds(distanceToTimeEnd);
         this.seconds.updateValueOnClock(seconds);
         let minutes = this.minutes.countToClockMinutes(distanceToTimeEnd);
         this.minutes.updateValueOnClock(minutes);
     }
-
+    
+    updatePageTitle() {
+        document.title = `${clock.handle.innerText} - Pomodoro Timer`;
+    }
+    
     reset() {
         this.minutes.updateValueOnClock(this.minutesFromUser);
         this.seconds.updateValueOnClock(0);
         this.stop();
         this.updatePageTitle();
     }
-
+    
     stop() {
         clearInterval(this.timerInterval);
         this.startStopButton.updateToStart();
     }
-
+    
+    set() {
+        let minutes = prompt("Enter minutes (1-99)", "25");
+        minutes = parseInt(minutes, 10);
+        if (isNaN(minutes) || minutes < 1 || minutes > 99) {
+            console.log("Niepoprawne dane");
+        } else {
+            this.minutesFromUser = minutes;
+            this.reset();
+        }
+    }
 }
 
 const startStopButton = new StartStopButton('start-stop');
@@ -193,12 +198,4 @@ startStopButton.handle.addEventListener('click', () => countdownTimer.startOrSto
 
 resetButton.handle.addEventListener('click', () => countdownTimer.reset());
 
-clock.handle.addEventListener('click', () => {
-    let minutes = prompt("Enter minutes (1-99)", "25");
-    minutes = parseInt(minutes, 10);
-    if (isNaN(minutes) || minutes < 1 || minutes > 99) {
-        console.log("Niepoprawne dane")
-    } else {
-        countdownTimer.set(minutes);
-    }
-});
+clock.handle.addEventListener('click', () => countdownTimer.set());
