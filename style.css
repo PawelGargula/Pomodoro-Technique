@@ -148,12 +148,13 @@ button.reset:hover, button.reset:focus {
 }
 
 .counter { 
-    font-size: 3vh;
+    font-size: 2.5vh;
     letter-spacing: 1px;
 }
 
 .message { 
-    font-size: 3vh;
+    margin-top: 0.5vh;
+    font-size: 2.5vh;
     letter-spacing: 1px;     
 }
 
