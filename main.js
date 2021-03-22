@@ -4,7 +4,7 @@ class Handle {
     }
 }
 
-class Clock extends Handle {}
+class Clock extends Handle { }
 
 class OnClockValueUpdater extends Handle {
     updateValueOnClock(value) {
@@ -17,10 +17,10 @@ class Seconds extends OnClockValueUpdater {
         let seconds = parseInt(this.handle.innerText, 10);
         if (isNaN(seconds) || seconds < 0 || seconds > 59) {
             seconds = 0;
-        } 
+        }
         return seconds * 1000;
     }
-    
+
     countToClockSeconds(miliseconds) {
         return Math.floor((miliseconds % (1000 * 60)) / 1000);
     }
@@ -31,10 +31,10 @@ class Minutes extends OnClockValueUpdater {
         let minutes = parseInt(this.handle.innerText, 10);
         if (isNaN(minutes) || minutes < 0 || minutes > 99) {
             minutes = 25;
-        } 
+        }
         return minutes * 1000 * 60;
     }
-    
+
     countToClockMinutes(miliseconds) {
         return Math.floor(miliseconds / (1000 * 60));
     }
@@ -52,7 +52,7 @@ class StartStopButton extends Handle {
     }
 }
 
-class ResetButton extends Handle {}
+class ResetButton extends Handle { }
 
 class Counter extends Handle {
     constructor(id) {
@@ -70,14 +70,14 @@ class Counter extends Handle {
     }
 }
 
-class Message extends Handle{
+class Message extends Handle {
     constructor(id) {
         super(id);
         this.counter = 1;
     }
 
     showMessageAboutBreak() {
-        if (this.counter < 4 ) {
+        if (this.counter < 4) {
             this.counter++;
             this.handle.innerText = 'Time for short break (3-5min)';
         } else {
@@ -99,7 +99,7 @@ class Alarm {
     play3Times() {
         this.alarm.play();
         let counter = 1;
-        this.alarm.onended = function() {
+        this.alarm.onended = function () {
             if (counter < 3) {
                 counter++;
                 this.play();
@@ -120,7 +120,7 @@ class CountdownTimer {
         this.minutesFromUser = 25;
         this.timerInterval;
     }
- 
+
     startOrStop() {
         if (startStopButton.handle.classList.contains('start')) {
             this.start();
@@ -128,7 +128,7 @@ class CountdownTimer {
             this.stop();
         }
     }
-    
+
     start() {
         this.startStopButton.updateToStop();
         this.message.reset();
@@ -136,7 +136,7 @@ class CountdownTimer {
         let timeEnd = this.now + this.minutes.countToMiliseconds() + this.seconds.countToMiliseconds() + 30;
         this.timerInterval = setInterval(() => this.update(timeEnd), 1000);
     }
-    
+
     get now() {
         return new Date().getTime();
     }
@@ -145,7 +145,7 @@ class CountdownTimer {
         let distanceToTimeEnd = timeEnd - this.now;
         this.updateClock(distanceToTimeEnd);
         this.updatePageTitle();
-        
+
         if (distanceToTimeEnd < 0) {
             this.alarm.play3Times();
             this.message.showMessageAboutBreak();
@@ -153,30 +153,30 @@ class CountdownTimer {
             this.reset();
         }
     }
-    
+
     updateClock(distanceToTimeEnd) {
         let seconds = this.seconds.countToClockSeconds(distanceToTimeEnd);
         this.seconds.updateValueOnClock(seconds);
         let minutes = this.minutes.countToClockMinutes(distanceToTimeEnd);
         this.minutes.updateValueOnClock(minutes);
     }
-    
+
     updatePageTitle() {
         document.title = `${clock.handle.innerText} - Pomodoro Timer`;
     }
-    
+
     reset() {
         this.minutes.updateValueOnClock(this.minutesFromUser);
         this.seconds.updateValueOnClock(0);
         this.stop();
         this.updatePageTitle();
     }
-    
+
     stop() {
         clearInterval(this.timerInterval);
         this.startStopButton.updateToStart();
     }
-    
+
     set() {
         let minutes = prompt("Enter minutes (1-99)", "25");
         minutes = parseInt(minutes, 10);
