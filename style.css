@@ -1,165 +1,170 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :root {
-    --italian-green-color: 	hsl(150, 100%, 27%);
-    --italian-white-color: hsl(72, 20%, 95%);
-    --darker-italian-white-color: hsl(72, 20%, 92%);
-    --italian-red-color: hsl(357, 72%, 47%);
-    --font-color: hsl(288, 80%, 5%);
+  --italian-green-color: hsl(150, 100%, 27%);
+  --italian-white-color: hsl(72, 20%, 95%);
+  --darker-italian-white-color: hsl(72, 20%, 92%);
+  --italian-red-color: hsl(357, 72%, 47%);
+  --font-color: hsl(288, 80%, 5%);
 }
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .full-screen-container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    background-color: var(--italian-white-color);
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--italian-white-color);
 }
 
 .full-screen-container::before {
-    content: '';
-    flex-grow: 1;
-    background-color: var(--italian-green-color);
+  content: "";
+  flex-grow: 1;
+  background-color: var(--italian-green-color);
 }
 
 .full-screen-container::after {
-    content: '';
-    flex-grow: 1;
-    background-color:  var(--italian-red-color);
+  content: "";
+  flex-grow: 1;
+  background-color: var(--italian-red-color);
 }
 
 .content-container {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-logo {
-    margin-bottom: 0;
-    font-size: 3.5vh;
-    letter-spacing: 2px;
-    padding: 1vh 1vw;
-    border: 2px solid var(--italian-green-color);
+  margin-bottom: 0;
+  font-size: 3.5vh;
+  letter-spacing: 2px;
+  padding: 1vh 1vw;
+  border: 2px solid var(--italian-green-color);
 }
 
 .info {
-    font-size: 0.5em;
-    font-weight: normal;
-    color: var(--font-color);
-    text-decoration: none;
+  font-size: 0.5em;
+  font-weight: normal;
+  color: var(--font-color);
+  text-decoration: none;
 }
 
 .info:hover {
-    color: tomato;
+  color: tomato;
 }
 
 .pomodoro-timer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .timer-logo {
-    margin-top: 0;
-    background-color: var(--darker-italian-white-color);
-    font-size: 2vh;
-    letter-spacing: 1px;
-    padding: 0.5vh 0.5vw;
-    border: 1px solid var(--font-color);
+  margin-top: 0;
+  background-color: var(--darker-italian-white-color);
+  font-size: 2vh;
+  letter-spacing: 1px;
+  padding: 0.5vh 0.5vw;
+  border: 1px solid var(--font-color);
 }
 
 .clock {
-    margin: 2vh 0;
-    display: flex;
-    background-color: hsl(9, 100%, 64%, 0.8);
-    color: var(--font-color);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 11vh;
-    padding: 0 2vw;
-    border: 3px solid var(--font-color);
-    -webkit-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
-    -moz-box-shadow:    1px 0px 20px 0px rgba(50, 50, 50, 1);
-    box-shadow:         1px 0px 20px 0px rgba(50, 50, 50, 1);
-    transition-duration: 0.3s;
+  margin: 2vh 0;
+  display: flex;
+  background-color: hsl(9, 100%, 64%, 0.8);
+  color: var(--font-color);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11vh;
+  padding: 0 2vw;
+  border: 3px solid var(--font-color);
+  -webkit-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
+  box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
+  transition-duration: 0.3s;
 }
 
-.clock:hover, .clock:focus {
-    cursor: pointer;
-    background-color: tomato;
-    -webkit-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
-    -moz-box-shadow:    1px 0px 30px 0px rgba(50, 50, 50, 1);
-    box-shadow:         1px 0px 30px 0px rgba(50, 50, 50, 1);
+.clock:hover,
+.clock:focus {
+  cursor: pointer;
+  background-color: tomato;
+  -webkit-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
+  box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
 }
 
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 .button-group > button {
-    display: block;
-    width: 100%;
-    margin: 1vh 0;
-    font-size: 3vh;
-    border: 2px solid var(--font-color);
-    border-radius: 5%;
-    cursor: pointer;
-    transition-duration: 0.3s;
-    -webkit-box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
-    -moz-box-shadow:    1px 0px 10px 0px rgba(50, 50, 50, 1);
-    box-shadow:         1px 0px 10px 0px rgba(50, 50, 50, 1);
+  display: block;
+  width: 100%;
+  margin: 1vh 0;
+  font-size: 3vh;
+  border: 2px solid var(--font-color);
+  border-radius: 5%;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  -webkit-box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
+  box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
 }
 
-button:hover, button:focus {
-    -webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
-    -moz-box-shadow:    1px 0px 15px 0px rgba(50, 50, 50, 1);
-    box-shadow:         1px 0px 15px 0px rgba(50, 50, 50, 1);
+button:hover,
+button:focus {
+  -webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+  box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
 }
 
 button.start {
-    background-color: hsla(122, 39%, 49%, 0.2);
+  background-color: hsla(122, 39%, 49%, 0.2);
 }
 
-button.start:hover, button.start:focus {
-    background-color: hsla(122, 39%, 49%, 0.4);
+button.start:hover,
+button.start:focus {
+  background-color: hsla(122, 39%, 49%, 0.4);
 }
 
 button.stop {
-    background-color: hsl(4, 90%, 58%, 0.2);
+  background-color: hsl(4, 90%, 58%, 0.2);
 }
 
-button.stop:hover, button.stop:focus {
-    background-color: hsl(4, 90%, 58%, 0.4);
+button.stop:hover,
+button.stop:focus {
+  background-color: hsl(4, 90%, 58%, 0.4);
 }
 
 button.reset {
-    background-color: hsl(195, 100%, 36%, 0.2);
+  background-color: hsl(195, 100%, 36%, 0.2);
 }
 
-button.reset:hover, button.reset:focus {
-    background-color: hsl(195, 100%, 36%, 0.4);
+button.reset:hover,
+button.reset:focus {
+  background-color: hsl(195, 100%, 36%, 0.4);
 }
 
-.counter { 
-    font-size: 2.5vh;
-    letter-spacing: 1px;
+.counter {
+  font-size: 2.5vh;
+  letter-spacing: 1px;
 }
 
-.message { 
-    margin-top: 0.5vh;
-    font-size: 2.5vh;
-    letter-spacing: 1px;     
+.message {
+  margin-top: 0.5vh;
+  font-size: 2.5vh;
+  letter-spacing: 1px;
 }
 
 .footer {
-    font-size: 1.7vh;
-    letter-spacing: 1px;
-    padding: 0.5vh 0.5vw;
-    border: 1px solid var(--italian-red-color);
+  font-size: 1.7vh;
+  letter-spacing: 1px;
+  padding: 0.5vh 0.5vw;
+  border: 1px solid var(--italian-red-color);
 }
