@@ -15,9 +15,8 @@ class OnClockValueUpdater extends Handle {
 class Seconds extends OnClockValueUpdater {
     countToMiliseconds() {
         let seconds = parseInt(this.handle.innerText, 10);
-        if (isNaN(seconds) || seconds < 0 || seconds > 59) {
-            seconds = 0;
-        }
+        if (isNaN(seconds) || seconds < 0 || seconds > 59)
+            return 0;
         return seconds * 1000;
     }
 
@@ -29,9 +28,8 @@ class Seconds extends OnClockValueUpdater {
 class Minutes extends OnClockValueUpdater {
     countToMiliseconds() {
         let minutes = parseInt(this.handle.innerText, 10);
-        if (isNaN(minutes) || minutes < 0 || minutes > 99) {
+        if (isNaN(minutes) || minutes < 0 || minutes > 99)
             minutes = 25;
-        }
         return minutes * 1000 * 60;
     }
 
@@ -61,9 +59,9 @@ class Counter extends Handle {
     }
 
     update() {
-        if (this.counter >= 4) {
+        if (this.counter >= 4)
             this.handle.innerText = 1;
-        } else {
+        else {
             this.counter++;
             this.handle.innerText = this.counter;
         }
@@ -91,15 +89,11 @@ class Message extends Handle {
     }
 }
 
-class Alarm {
-    constructor(path) {
-        this.alarm = new Audio(path);
-    }
-
+class Alarm extends Audio {
     play3Times() {
-        this.alarm.play();
+        this.play();
         let counter = 1;
-        this.alarm.onended = function () {
+        this.onended = function () {
             if (counter < 3) {
                 counter++;
                 this.play();
@@ -122,11 +116,10 @@ class CountdownTimer {
     }
 
     startOrStop() {
-        if (startStopButton.handle.classList.contains('start')) {
+        if (startStopButton.handle.classList.contains('start'))
             this.start();
-        } else {
+        else
             this.stop();
-        }
     }
 
     start() {
@@ -141,12 +134,12 @@ class CountdownTimer {
         return new Date().getTime();
     }
 
-    update(timeEnd) {
-        let distanceToTimeEnd = timeEnd - this.now;
+    update(miliseconds) {
+        let distanceToTimeEnd = miliseconds - this.now;
         this.updateClock(distanceToTimeEnd);
         this.updatePageTitle();
 
-        if (distanceToTimeEnd < 0) {
+        if (distanceToTimeEnd < 1) {
             this.alarm.play3Times();
             this.message.showMessageAboutBreak();
             this.counter.update();
@@ -154,10 +147,10 @@ class CountdownTimer {
         }
     }
 
-    updateClock(distanceToTimeEnd) {
-        let seconds = this.seconds.countToClockSeconds(distanceToTimeEnd);
+    updateClock(miliseconds) {
+        let seconds = this.seconds.countToClockSeconds(miliseconds);
         this.seconds.updateValueOnClock(seconds);
-        let minutes = this.minutes.countToClockMinutes(distanceToTimeEnd);
+        let minutes = this.minutes.countToClockMinutes(miliseconds);
         this.minutes.updateValueOnClock(minutes);
     }
 
@@ -178,11 +171,14 @@ class CountdownTimer {
     }
 
     set() {
-        let minutes = prompt("Enter minutes (1-99)", "25");
+        let minutes = prompt("Enter minutes (1-99)", this.minutesFromUser);
+        if (minutes === null) 
+            return;
+            
         minutes = parseInt(minutes, 10);
-        if (isNaN(minutes) || minutes < 1 || minutes > 99) {
-            console.log("Niepoprawne dane");
-        } else {
+        if (isNaN(minutes) || minutes < 1 || minutes > 99)
+            alert("Wrong number, must be between 1 and 99");
+        else {
             this.minutesFromUser = minutes;
             this.reset();
         }
