@@ -90,7 +90,7 @@ body {
   transition-duration: 0.3s;
 }
 
-.clock:hover{
+.clock:hover {
   cursor: pointer;
   background-color: tomato;
   -webkit-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
@@ -98,11 +98,12 @@ body {
   box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
 }
 
-.clock:focus-visible
-{
-  background-image: repeating-linear-gradient(-45deg,
-                                              transparent 0 4vh,
-                                            rgba(255, 255, 255, 0.5) 4vh 8vh);
+.clock:focus-visible {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 4vh,
+    rgba(255, 255, 255, 0.5) 4vh 8vh
+  );
 }
 
 button:focus {
@@ -123,7 +124,7 @@ button:focus {
   box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
 }
 
-button:hover{
+button:hover {
   -webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
   -moz-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
   box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
@@ -133,7 +134,7 @@ button.start {
   background-color: hsla(122, 39%, 49%, 0.2);
 }
 
-button.start:hover{
+button.start:hover {
   background-color: hsla(122, 39%, 49%, 0.4);
 }
 
@@ -149,15 +150,18 @@ button.reset {
   background-color: hsl(195, 100%, 36%, 0.2);
 }
 
-button.reset:hover{
+button.reset:hover {
   background-color: hsl(195, 100%, 36%, 0.4);
 }
 
-button.start:focus-visible, button.stop:focus-visible, button.reset:focus-visible
-{
-  background-image: repeating-linear-gradient(-45deg,
-                                              transparent 0 1vh,
-                                            white 1vh 2vh);
+button.start:focus-visible,
+button.stop:focus-visible,
+button.reset:focus-visible {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 1vh,
+    white 1vh 2vh
+  );
 }
 
 .counter {

@@ -1,3 +1,5 @@
+// Have to change class to be static :D
+
 class Handle {
     constructor(id) {
         this.handle = document.getElementById(id);
@@ -172,9 +174,9 @@ class CountdownTimer {
 
     set() {
         let minutes = prompt("Enter minutes (1-99)", this.minutesFromUser);
-        if (minutes === null) 
+        if (minutes === null)
             return;
-            
+
         minutes = parseInt(minutes, 10);
         if (isNaN(minutes) || minutes < 1 || minutes > 99)
             alert("Wrong number, must be between 1 and 99");
