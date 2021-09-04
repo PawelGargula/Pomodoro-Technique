@@ -12,6 +12,7 @@
 
 body {
   margin: 0;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .full-screen-container {
@@ -42,22 +43,33 @@ body {
 }
 
 .page-logo {
+  color: white;
   margin-bottom: 0;
-  font-size: 3.5vh;
+  font-size: 2.5vh;
   letter-spacing: 2px;
   padding: 1vh 1vw;
   border: 2px solid var(--italian-green-color);
+  background-color: var(--italian-green-color);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 4vh,
+    rgba(255, 255, 255, 0.5) 4vh 8vh
+  );
 }
 
 .info {
   font-size: 0.5em;
   font-weight: normal;
-  color: var(--font-color);
+  color: white;
   text-decoration: none;
 }
 
 .info:hover {
   color: tomato;
+}
+
+.info:focus-visible {
+  outline: 0.3vh dashed white;
 }
 
 .pomodoro-timer {
@@ -68,22 +80,31 @@ body {
 
 .timer-logo {
   margin-top: 0;
-  background-color: var(--darker-italian-white-color);
-  font-size: 2vh;
+  font-size: 1.5vh;
   letter-spacing: 1px;
-  padding: 0.5vh 0.5vw;
-  border: 1px solid var(--font-color);
+}
+
+.counter {
+  z-index: 1;
+  font-size: 1.7vh;
+  font-weight: 600;
+  color: var(--font-color);
+  background-color: hsl(9, 100%, 64%, 0.8);
+  border-top: 0.3vh solid var(--font-color);
+  border-left: 0.3vh solid var(--font-color);
+  border-right: 0.3vh solid var(--font-color);
+  padding: 0 1.5vh;
 }
 
 .clock {
-  margin: 2vh 0;
+  margin-bottom: 2vh;
   display: flex;
   background-color: hsl(9, 100%, 64%, 0.8);
   color: var(--font-color);
   font-family: "Courier New", Courier, monospace;
   font-size: 11vh;
   padding: 0 2vw;
-  border: 3px solid var(--font-color);
+  border: 0.4vh solid var(--font-color);
   -webkit-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
   -moz-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
   box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
@@ -106,15 +127,16 @@ body {
   );
 }
 
-button:focus {
-  outline: none;
+button:focus-visible {
+  outline: 0.3vh dashed white;
 }
 
 .button-group > button {
   display: block;
   width: 100%;
   margin: 1vh 0;
-  font-size: 3vh;
+  font-size: 2.5vh;
+  font-family: 'Orbitron', sans-serif;
   border: 2px solid var(--font-color);
   border-radius: 5%;
   cursor: pointer;
@@ -164,20 +186,22 @@ button.reset:focus-visible {
   );
 }
 
-.counter {
-  font-size: 2.5vh;
-  letter-spacing: 1px;
-}
-
 .message {
   margin-top: 0.5vh;
-  font-size: 2.5vh;
+  font-size: 2vh;
   letter-spacing: 1px;
 }
 
 .footer {
-  font-size: 1.7vh;
+  color: white;
+  font-size: 12px;
   letter-spacing: 1px;
   padding: 0.5vh 0.5vw;
   border: 1px solid var(--italian-red-color);
+  background-color: var(--italian-red-color);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 4vh,
+    rgba(255, 255, 255, 0.5) 4vh 8vh
+  );
 }

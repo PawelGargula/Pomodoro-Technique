@@ -11,6 +11,8 @@
     <meta name="keywords" content="pomodoro, technique, timer, time, menagement" />
     <meta name="author" content="Paweł Gargula" />
 
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="style.css" />
 
     <script defer src="main.js"></script>
@@ -34,6 +36,7 @@
                         <header>
                             <h2 class="timer-logo">Pomodoro Timer</h2>
                         </header>
+                        <span class="counter"><span id="counter">1</span></span>
                         <button id="clock" class="clock">
                             <span id="minutes">25</span>
                             <span>:</span>
@@ -45,8 +48,7 @@
                             </button>
                             <button type="button" id="reset" class="reset">Reset</button>
                         </div>
-                        <span class="counter">Counter: <span id="counter">1</span></span>
-                        <span id="message" class="message">Message</span>
+                        <span id="message" class="message">Message about break</span>
                     </div>
                 </section>
             </main>
