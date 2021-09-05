@@ -90,10 +90,11 @@ body {
   font-weight: 600;
   color: var(--font-color);
   background-color: hsl(9, 100%, 64%, 0.8);
-  border-top: 0.3vh solid var(--font-color);
+  border-bottom: 0.3vh solid var(--font-color);
   border-left: 0.3vh solid var(--font-color);
   border-right: 0.3vh solid var(--font-color);
   padding: 0 1.5vh;
+  transform: translateY(calc(100% + 0.4vh));
 }
 
 .clock {

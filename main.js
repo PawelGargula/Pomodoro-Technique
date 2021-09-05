@@ -87,7 +87,7 @@ class Message extends Handle {
     }
 
     reset() {
-        this.handle.innerText = 'Message';
+        this.handle.innerText = 'Message about break';
     }
 }
 
