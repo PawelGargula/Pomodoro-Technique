@@ -1,2 +1,2 @@
 Add tasks
-Box counter and message about break
+Box message about break

@@ -1,4 +1,4 @@
-// Have to change class to be static :D
+// Have to change methods to be static :D
 
 class Handle {
     constructor(id) {
