@@ -6,47 +6,57 @@ class Handle {
     }
 }
 
-class Clock extends Handle { }
-
-class OnClockValueUpdater extends Handle {
-    updateValueOnClock(value) {
-        this.handle.innerText = (value < 10) ? `0${value}` : value;
-    }
+class Clock {
+    static handle = document.getElementById("clock");
 }
 
-class Seconds extends OnClockValueUpdater {
-    countToMiliseconds() {
+class Seconds {
+    static handle = document.getElementById("seconds");
+
+    static countToMiliseconds() {
         let seconds = parseInt(this.handle.innerText, 10);
         if (isNaN(seconds) || seconds < 0 || seconds > 59)
             return 0;
         return seconds * 1000;
     }
 
-    countToClockSeconds(miliseconds) {
+    static countToClockSeconds(miliseconds) {
         return Math.floor((miliseconds % (1000 * 60)) / 1000);
+    }
+
+    static updateValueOnClock(value) {
+        this.handle.innerText = (value < 10) ? `0${value}` : value;
     }
 }
 
-class Minutes extends OnClockValueUpdater {
-    countToMiliseconds() {
+class Minutes {
+    static handle = document.getElementById("minutes");
+
+    static countToMiliseconds() {
         let minutes = parseInt(this.handle.innerText, 10);
         if (isNaN(minutes) || minutes < 0 || minutes > 99)
             minutes = 25;
         return minutes * 1000 * 60;
     }
 
-    countToClockMinutes(miliseconds) {
+    static countToClockMinutes(miliseconds) {
         return Math.floor(miliseconds / (1000 * 60));
+    }
+
+    static updateValueOnClock(value) {
+        this.handle.innerText = (value < 10) ? `0${value}` : value;
     }
 }
 
-class StartStopButton extends Handle {
-    updateToStop() {
+class StartStopButton {
+    static handle = document.getElementById("start-stop");
+
+    static updateToStop() {
         this.handle.className = 'stop';
         this.handle.innerText = 'Stop';
     }
 
-    updateToStart() {
+    static updateToStart() {
         this.handle.className = 'start';
         this.handle.innerText = 'Start';
     }
@@ -105,11 +115,7 @@ class Alarm extends Audio {
 }
 
 class CountdownTimer {
-    constructor(startStopButton, clock) {
-        this.startStopButton = startStopButton;
-        this.clock = clock;
-        this.seconds = new Seconds('seconds');
-        this.minutes = new Minutes('minutes');
+    constructor() {
         this.counter = new Counter('counter');
         this.message = new Message('message');
         this.alarm = new Alarm('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
@@ -118,17 +124,17 @@ class CountdownTimer {
     }
 
     startOrStop() {
-        if (startStopButton.handle.classList.contains('start'))
+        if (StartStopButton.handle.classList.contains('start'))
             this.start();
         else
             this.stop();
     }
 
     start() {
-        this.startStopButton.updateToStop();
+        StartStopButton.updateToStop();
         this.message.reset();
         //Give a few miliseconds for program so then it can update clockElement correct after first second from start
-        let timeEnd = this.now + this.minutes.countToMiliseconds() + this.seconds.countToMiliseconds() + 30;
+        let timeEnd = this.now + Minutes.countToMiliseconds() + Seconds.countToMiliseconds() + 30;
         this.timerInterval = setInterval(() => this.update(timeEnd), 1000);
     }
 
@@ -150,26 +156,26 @@ class CountdownTimer {
     }
 
     updateClock(miliseconds) {
-        let seconds = this.seconds.countToClockSeconds(miliseconds);
-        this.seconds.updateValueOnClock(seconds);
-        let minutes = this.minutes.countToClockMinutes(miliseconds);
-        this.minutes.updateValueOnClock(minutes);
+        let seconds = Seconds.countToClockSeconds(miliseconds);
+        Seconds.updateValueOnClock(seconds);
+        let minutes = Minutes.countToClockMinutes(miliseconds);
+        Minutes.updateValueOnClock(minutes);
     }
 
     updatePageTitle() {
-        document.title = `${clock.handle.innerText} - Pomodoro Timer`;
+        document.title = `${Clock.handle.innerText} - Pomodoro Timer`;
     }
 
     reset() {
-        this.minutes.updateValueOnClock(this.minutesFromUser);
-        this.seconds.updateValueOnClock(0);
+        Minutes.updateValueOnClock(this.minutesFromUser);
+        Seconds.updateValueOnClock(0);
         this.stop();
         this.updatePageTitle();
     }
 
     stop() {
         clearInterval(this.timerInterval);
-        this.startStopButton.updateToStart();
+        StartStopButton.updateToStart();
     }
 
     set() {
@@ -187,13 +193,11 @@ class CountdownTimer {
     }
 }
 
-const startStopButton = new StartStopButton('start-stop');
-const clock = new Clock('clock');
-const countdownTimer = new CountdownTimer(startStopButton, clock);
+const countdownTimer = new CountdownTimer();
 const resetButton = new ResetButton('reset');
 
-startStopButton.handle.addEventListener('click', () => countdownTimer.startOrStop());
+StartStopButton.handle.addEventListener('click', () => countdownTimer.startOrStop());
 
 resetButton.handle.addEventListener('click', () => countdownTimer.reset());
 
-clock.handle.addEventListener('click', () => countdownTimer.set());
+Clock.handle.addEventListener('click', () => countdownTimer.set());
