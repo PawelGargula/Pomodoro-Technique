@@ -15,8 +15,7 @@ class Seconds {
 
     static countToMiliseconds() {
         let seconds = parseInt(this.handle.innerText, 10);
-        if (isNaN(seconds) || seconds < 0 || seconds > 59)
-            return 0;
+        if (isNaN(seconds) || seconds < 0 || seconds > 59) return 0;
         return seconds * 1000;
     }
 
@@ -25,7 +24,7 @@ class Seconds {
     }
 
     static updateValueOnClock(value) {
-        this.handle.innerText = (value < 10) ? `0${value}` : value;
+        this.handle.innerText = value < 10 ? `0${value}` : value;
     }
 }
 
@@ -34,8 +33,7 @@ class Minutes {
 
     static countToMiliseconds() {
         let minutes = parseInt(this.handle.innerText, 10);
-        if (isNaN(minutes) || minutes < 0 || minutes > 99)
-            minutes = 25;
+        if (isNaN(minutes) || minutes < 0 || minutes > 99) minutes = 25;
         return minutes * 1000 * 60;
     }
 
@@ -44,7 +42,7 @@ class Minutes {
     }
 
     static updateValueOnClock(value) {
-        this.handle.innerText = (value < 10) ? `0${value}` : value;
+        this.handle.innerText = value < 10 ? `0${value}` : value;
     }
 }
 
@@ -52,52 +50,46 @@ class StartStopButton {
     static handle = document.getElementById("start-stop");
 
     static updateToStop() {
-        this.handle.className = 'stop';
-        this.handle.innerText = 'Stop';
+        this.handle.className = "stop";
+        this.handle.innerText = "Stop";
     }
 
     static updateToStart() {
-        this.handle.className = 'start';
-        this.handle.innerText = 'Start';
+        this.handle.className = "start";
+        this.handle.innerText = "Start";
     }
 }
 
-class ResetButton extends Handle { }
+class ResetButton {
+    static handle = document.getElementById("reset");
+}
 
-class Counter extends Handle {
-    constructor(id) {
-        super(id);
-        this.counter = 1;
-    }
+class Counter {
+    static handle = document.getElementById("counter");
+    static value = 1;
 
-    update() {
-        if (this.counter >= 4)
-            this.handle.innerText = 1;
+    static update() {
+        if (this.value >= 4) this.handle.innerText = 1;
         else {
-            this.counter++;
-            this.handle.innerText = this.counter;
+            this.value++;
+            this.handle.innerText = this.value;
         }
     }
 }
 
-class Message extends Handle {
-    constructor(id) {
-        super(id);
-        this.counter = 1;
-    }
+class Message {
+    static handle = document.getElementById("message");
 
-    showMessageAboutBreak() {
-        if (this.counter < 4) {
-            this.counter++;
-            this.handle.innerText = 'Time for short break (3-5min)';
+    static showMessageAboutBreak(counter) {
+        if (counter < 4) {
+            this.handle.innerText = "Time for short break (3-5min)";
         } else {
-            this.counter = 1;
-            this.handle.innerText = 'Time for long break (15-30min)';
+            this.handle.innerText = "Time for long break (15-30min)";
         }
     }
 
-    reset() {
-        this.handle.innerText = 'Message about break';
+    static reset() {
+        this.handle.innerText = "Message about break";
     }
 }
 
@@ -110,31 +102,31 @@ class Alarm extends Audio {
                 counter++;
                 this.play();
             }
-        }
+        };
     }
 }
 
 class CountdownTimer {
     constructor() {
-        this.counter = new Counter('counter');
-        this.message = new Message('message');
-        this.alarm = new Alarm('sound/alarm.flac'); //sound from https://freesound.org/s/22627/
+        this.alarm = new Alarm("sound/alarm.flac"); //sound from https://freesound.org/s/22627/
         this.minutesFromUser = 25;
         this.timerInterval;
     }
 
     startOrStop() {
-        if (StartStopButton.handle.classList.contains('start'))
-            this.start();
-        else
-            this.stop();
+        if (StartStopButton.handle.classList.contains("start")) this.start();
+        else this.stop();
     }
 
     start() {
         StartStopButton.updateToStop();
-        this.message.reset();
+        Message.reset();
         //Give a few miliseconds for program so then it can update clockElement correct after first second from start
-        let timeEnd = this.now + Minutes.countToMiliseconds() + Seconds.countToMiliseconds() + 30;
+        let timeEnd =
+            this.now +
+            Minutes.countToMiliseconds() +
+            Seconds.countToMiliseconds() +
+            30;
         this.timerInterval = setInterval(() => this.update(timeEnd), 1000);
     }
 
@@ -149,8 +141,8 @@ class CountdownTimer {
 
         if (distanceToTimeEnd < 1) {
             this.alarm.play3Times();
-            this.message.showMessageAboutBreak();
-            this.counter.update();
+            Message.showMessageAboutBreak(Counter.value);
+            Counter.update();
             this.reset();
         }
     }
@@ -180,8 +172,7 @@ class CountdownTimer {
 
     set() {
         let minutes = prompt("Enter minutes (1-99)", this.minutesFromUser);
-        if (minutes === null)
-            return;
+        if (minutes === null) return;
 
         minutes = parseInt(minutes, 10);
         if (isNaN(minutes) || minutes < 1 || minutes > 99)
@@ -194,10 +185,11 @@ class CountdownTimer {
 }
 
 const countdownTimer = new CountdownTimer();
-const resetButton = new ResetButton('reset');
 
-StartStopButton.handle.addEventListener('click', () => countdownTimer.startOrStop());
+StartStopButton.handle.addEventListener("click", () =>
+    countdownTimer.startOrStop()
+);
 
-resetButton.handle.addEventListener('click', () => countdownTimer.reset());
+ResetButton.handle.addEventListener("click", () => countdownTimer.reset());
 
-Clock.handle.addEventListener('click', () => countdownTimer.set());
+Clock.handle.addEventListener("click", () => countdownTimer.set());
