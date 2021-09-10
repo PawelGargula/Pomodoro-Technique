@@ -80,8 +80,9 @@ class Counter {
 class Message {
     static handle = document.getElementById("message");
 
-    static showMessageAboutBreak(counter) {
-        if (counter < 4) {
+    // To do
+    static showMessageAboutBreak() {
+        if (Counter.value < 4) {
             this.handle.innerText = "Time for short break (3-5min)";
         } else {
             this.handle.innerText = "Time for long break (15-30min)";
@@ -141,7 +142,7 @@ class CountdownTimer {
 
         if (distanceToTimeEnd < 1) {
             this.alarm.play3Times();
-            Message.showMessageAboutBreak(Counter.value);
+            Message.showMessageAboutBreak();
             Counter.update();
             this.reset();
         }
