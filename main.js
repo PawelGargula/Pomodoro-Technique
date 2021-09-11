@@ -1,74 +1,78 @@
-// Have to change methods to be static :D
-
-class Handle {
-    constructor(id) {
-        this.handle = document.getElementById(id);
+const Clock = new class {
+    constructor() {
+        this.handle = document.getElementById("clock");
     }
 }
 
-class Clock {
-    static handle = document.getElementById("clock");
-}
+const Seconds = new class {
+    constructor() {
+        this.handle = document.getElementById("seconds");
+    }
 
-class Seconds {
-    static handle = document.getElementById("seconds");
-
-    static countToMiliseconds() {
+    countToMiliseconds() {
         let seconds = parseInt(this.handle.innerText, 10);
         if (isNaN(seconds) || seconds < 0 || seconds > 59) return 0;
         return seconds * 1000;
     }
 
-    static countToClockSeconds(miliseconds) {
+    countToClockSeconds(miliseconds) {
         return Math.floor((miliseconds % (1000 * 60)) / 1000);
     }
 
-    static updateValueOnClock(value) {
+    updateValueOnClock(value) {
         this.handle.innerText = value < 10 ? `0${value}` : value;
     }
 }
 
-class Minutes {
-    static handle = document.getElementById("minutes");
+const Minutes = new class {
+    constructor() {
+        this.handle = document.getElementById("minutes");
+    }
 
-    static countToMiliseconds() {
+    countToMiliseconds() {
         let minutes = parseInt(this.handle.innerText, 10);
         if (isNaN(minutes) || minutes < 0 || minutes > 99) minutes = 25;
         return minutes * 1000 * 60;
     }
 
-    static countToClockMinutes(miliseconds) {
+    countToClockMinutes(miliseconds) {
         return Math.floor(miliseconds / (1000 * 60));
     }
 
-    static updateValueOnClock(value) {
+    updateValueOnClock(value) {
         this.handle.innerText = value < 10 ? `0${value}` : value;
     }
 }
 
-class StartStopButton {
-    static handle = document.getElementById("start-stop");
+const StartStopButton = new class {
+    constructor() {
+        this.handle = document.getElementById("start-stop");
+    }
 
-    static updateToStop() {
+    updateToStop() {
         this.handle.className = "stop";
         this.handle.innerText = "Stop";
     }
 
-    static updateToStart() {
+    updateToStart() {
         this.handle.className = "start";
         this.handle.innerText = "Start";
     }
 }
 
-class ResetButton {
-    static handle = document.getElementById("reset");
+const ResetButton = new class {
+    constructor() {
+        this.handle = document.getElementById("reset");
+    }
 }
 
-class Counter {
-    static handle = document.getElementById("counter");
-    static value = 1;
+const Counter = new class {
+    constructor() {
+        this.handle = document.getElementById("counter");
+        this.value = 1;
+    }
 
-    static update() {
+    update() {
         if (this.value >= 4) this.handle.innerText = 1;
         else {
             this.value++;
@@ -77,11 +81,12 @@ class Counter {
     }
 }
 
-class Message {
-    static handle = document.getElementById("message");
+const Message = new class {
+    constructor() {
+        this.handle = document.getElementById("message");
+    }
 
-    // To do
-    static showMessageAboutBreak() {
+    showMessageAboutBreak() {
         if (Counter.value < 4) {
             this.handle.innerText = "Time for short break (3-5min)";
         } else {
@@ -89,7 +94,7 @@ class Message {
         }
     }
 
-    static reset() {
+    reset() {
         this.handle.innerText = "Message about break";
     }
 }
@@ -107,7 +112,7 @@ class Alarm extends Audio {
     }
 }
 
-class CountdownTimer {
+let CountdownTimer = new class {
     constructor() {
         this.alarm = new Alarm("sound/alarm.flac"); //sound from https://freesound.org/s/22627/
         this.minutesFromUser = 25;
@@ -185,12 +190,10 @@ class CountdownTimer {
     }
 }
 
-const countdownTimer = new CountdownTimer();
-
 StartStopButton.handle.addEventListener("click", () =>
-    countdownTimer.startOrStop()
+    CountdownTimer.startOrStop()
 );
 
-ResetButton.handle.addEventListener("click", () => countdownTimer.reset());
+ResetButton.handle.addEventListener("click", () => CountdownTimer.reset());
 
-Clock.handle.addEventListener("click", () => countdownTimer.set());
+Clock.handle.addEventListener("click", () => CountdownTimer.set());
