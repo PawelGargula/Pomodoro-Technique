@@ -1,58 +1,50 @@
-const Clock = new class {
-    constructor() {
-        this.handle = document.getElementById("clock");
-    }
+const Clock = {
+    handle: document.getElementById("clock")
 }
 
-const Seconds = new class {
-    constructor() {
-        this.handle = document.getElementById("seconds");
-    }
+const Seconds = {
+    handle: document.getElementById("seconds"),
 
     countToMiliseconds() {
         let seconds = parseInt(this.handle.innerText, 10);
         if (isNaN(seconds) || seconds < 0 || seconds > 59) return 0;
         return seconds * 1000;
-    }
+    },
 
     countToClockSeconds(miliseconds) {
         return Math.floor((miliseconds % (1000 * 60)) / 1000);
-    }
+    },
 
     updateValueOnClock(value) {
         this.handle.innerText = value < 10 ? `0${value}` : value;
     }
 }
 
-const Minutes = new class {
-    constructor() {
-        this.handle = document.getElementById("minutes");
-    }
+const Minutes = {
+    handle: document.getElementById("minutes"),
 
     countToMiliseconds() {
         let minutes = parseInt(this.handle.innerText, 10);
         if (isNaN(minutes) || minutes < 0 || minutes > 99) minutes = 25;
         return minutes * 1000 * 60;
-    }
+    },
 
     countToClockMinutes(miliseconds) {
         return Math.floor(miliseconds / (1000 * 60));
-    }
+    },
 
     updateValueOnClock(value) {
         this.handle.innerText = value < 10 ? `0${value}` : value;
     }
 }
 
-const StartStopButton = new class {
-    constructor() {
-        this.handle = document.getElementById("start-stop");
-    }
+const StartStopButton = {
+    handle: document.getElementById("start-stop"),
 
     updateToStop() {
         this.handle.className = "stop";
         this.handle.innerText = "Stop";
-    }
+    },
 
     updateToStart() {
         this.handle.className = "start";
@@ -60,17 +52,13 @@ const StartStopButton = new class {
     }
 }
 
-const ResetButton = new class {
-    constructor() {
-        this.handle = document.getElementById("reset");
-    }
+const ResetButton = {
+    handle: document.getElementById("reset")
 }
 
-const Counter = new class {
-    constructor() {
-        this.handle = document.getElementById("counter");
-        this.value = 1;
-    }
+const Counter = {
+    handle: document.getElementById("counter"),
+    value: 1,
 
     update() {
         if (this.value >= 4) this.handle.innerText = 1;
@@ -81,10 +69,8 @@ const Counter = new class {
     }
 }
 
-const Message = new class {
-    constructor() {
-        this.handle = document.getElementById("message");
-    }
+const Message = {
+    handle: document.getElementById("message"),
 
     showMessageAboutBreak() {
         if (Counter.value < 4) {
@@ -92,7 +78,7 @@ const Message = new class {
         } else {
             this.handle.innerText = "Time for long break (15-30min)";
         }
-    }
+    },
 
     reset() {
         this.handle.innerText = "Message about break";
@@ -112,17 +98,16 @@ class Alarm extends Audio {
     }
 }
 
-let CountdownTimer = new class {
-    constructor() {
-        this.alarm = new Alarm("sound/alarm.flac"); //sound from https://freesound.org/s/22627/
-        this.minutesFromUser = 25;
-        this.timerInterval;
-    }
+const CountdownTimer = {
+    alarm: new Alarm("sound/alarm.flac"), //sound from https://freesound.org/s/22627/
+    minutesFromUser: 25,
+    timerInterval: null,
 
     startOrStop() {
+        // Warunek do zmiany
         if (StartStopButton.handle.classList.contains("start")) this.start();
         else this.stop();
-    }
+    },
 
     start() {
         StartStopButton.updateToStop();
@@ -134,11 +119,11 @@ let CountdownTimer = new class {
             Seconds.countToMiliseconds() +
             30;
         this.timerInterval = setInterval(() => this.update(timeEnd), 1000);
-    }
+    },
 
     get now() {
         return new Date().getTime();
-    }
+    },
 
     update(miliseconds) {
         let distanceToTimeEnd = miliseconds - this.now;
@@ -151,30 +136,30 @@ let CountdownTimer = new class {
             Counter.update();
             this.reset();
         }
-    }
+    },
 
     updateClock(miliseconds) {
         let seconds = Seconds.countToClockSeconds(miliseconds);
         Seconds.updateValueOnClock(seconds);
         let minutes = Minutes.countToClockMinutes(miliseconds);
         Minutes.updateValueOnClock(minutes);
-    }
+    },
 
     updatePageTitle() {
         document.title = `${Clock.handle.innerText} - Pomodoro Timer`;
-    }
+    },
 
     reset() {
         Minutes.updateValueOnClock(this.minutesFromUser);
         Seconds.updateValueOnClock(0);
         this.stop();
         this.updatePageTitle();
-    }
+    },
 
     stop() {
         clearInterval(this.timerInterval);
         StartStopButton.updateToStart();
-    }
+    },
 
     set() {
         let minutes = prompt("Enter minutes (1-99)", this.minutesFromUser);
