@@ -125,8 +125,8 @@ const CountdownTimer = {
         return new Date().getTime();
     },
 
-    update(miliseconds) {
-        let distanceToTimeEnd = miliseconds - this.now;
+    update(timeEnd) {
+        let distanceToTimeEnd = timeEnd - this.now;
         this.updateClock(distanceToTimeEnd);
         this.updatePageTitle();
 
