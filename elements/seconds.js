@@ -11,7 +11,7 @@ export const seconds = {
         return Math.floor((miliseconds % (1000 * 60)) / 1000);
     },
 
-    updateValueOnClock(value) {
+    update(value) {
         this.handle.innerText = value < 10 ? `0${value}` : value;
     }
 }

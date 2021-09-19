@@ -9,14 +9,15 @@ import { clock } from "./clock.js";
 export const countdownTimer = {
     minutesFromUser: 25,
     timerInterval: null,
+    isStopped: true,
 
     startOrStop() {
-        // Warunek do zmiany
-        if (startStopButton.handle.classList.contains("start")) this.start();
+        if (this.isStopped) this.start();
         else this.stop();
     },
 
     start() {
+        this.isStopped = false;
         startStopButton.updateToStop();
         message.reset();
         //Give a few miliseconds for program so then it can update clockElement correct after first second from start
@@ -47,9 +48,9 @@ export const countdownTimer = {
 
     updateClock(miliseconds) {
         let sec = seconds.countToClockSeconds(miliseconds);
-        seconds.updateValueOnClock(sec);
+        seconds.update(sec);
         let min = minutes.countToClockMinutes(miliseconds);
-        minutes.updateValueOnClock(min);
+        minutes.update(min);
     },
 
     updatePageTitle() {
@@ -57,13 +58,14 @@ export const countdownTimer = {
     },
 
     reset() {
-        minutes.updateValueOnClock(this.minutesFromUser);
-        seconds.updateValueOnClock(0);
+        minutes.update(this.minutesFromUser);
+        seconds.update(0);
         this.stop();
         this.updatePageTitle();
     },
 
     stop() {
+        this.isStopped = true;
         clearInterval(this.timerInterval);
         startStopButton.updateToStart();
     },
