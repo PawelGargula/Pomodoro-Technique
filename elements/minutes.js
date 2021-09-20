@@ -2,9 +2,14 @@ export const minutes = {
     handle: document.getElementById("minutes"),
 
     countToMiliseconds() {
-        let minutes = parseInt(this.handle.innerText, 10);
-        if (isNaN(minutes) || minutes < 0 || minutes > 99) minutes = 25;
-        return minutes * 1000 * 60;
+        return this.value * 1000 * 60;
+    },
+
+    get value() {
+        let value = parseInt(this.handle.innerText, 10);
+        if (isNaN(value) || value < 0 || value > 99)
+            return value = 25;
+        return value;
     },
 
     countToClockMinutes(miliseconds) {
