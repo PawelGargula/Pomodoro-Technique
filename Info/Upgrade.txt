@@ -1,2 +1,3 @@
 Add tasks
-Box message about break
+Add tests with cypress
+Give info about your time spend in work, in periods of time like day, week, month
