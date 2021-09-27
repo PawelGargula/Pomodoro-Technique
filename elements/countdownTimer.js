@@ -5,9 +5,10 @@ import { startStopButton } from "./startStopButton.js";
 import { seconds } from "./seconds.js";
 import { minutes } from "./minutes.js";
 import { clock } from "./clock.js";
+import { storage } from "./localStorage.js";
 
 export const countdownTimer = {
-    minutesFromUser: 25,
+    minutesFromUser: storage.getMinutes(),
     timerInterval: null,
     isStopped: true,
 
@@ -79,6 +80,7 @@ export const countdownTimer = {
             alert("Wrong number, must be between 1 and 99");
         else {
             this.minutesFromUser = minutes;
+            storage.setMinutes(minutes);
             this.reset();
         }
     }
