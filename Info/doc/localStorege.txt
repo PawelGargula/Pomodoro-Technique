@@ -1,0 +1,22 @@
+local storage
+When i want to setItem(key, value)?
+- Every time when user set countdownTimer
+
+When i want to getItem(key)?
+- If i open site
+
+Example:
+localStorage.setItem("myKey", "some value");
+localStorage.getItem("myKey"); // {"myKey": "some value"}
+
+Want to use it only when there are local storage supported:
+function isStorageSupported(globalObject, storageType) {
+   try {
+      const storage = globalObject\[storageType];
+      storage.setItem("test", "test");
+      storage.removeItem("test");
+      return true;
+ } catch (err) {
+   return false;
+ }
+}
