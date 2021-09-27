@@ -1,4 +1,4 @@
-export let storage = {
+export let lStorage = {
     minutesKey: "minutes",
 
     getMinutes() {
