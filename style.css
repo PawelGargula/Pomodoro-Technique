@@ -118,7 +118,7 @@ body {
 }
 
 button:focus-visible {
-  outline: none;
+  outline: solid yellow;
 }
 
 .button-group > button {
