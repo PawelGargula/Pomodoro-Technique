@@ -50,7 +50,6 @@ body {
 }
 
 .info {
-  font-weight: normal;
   color: hsl(150, 100%, 26%);
   text-decoration: none;
 }
