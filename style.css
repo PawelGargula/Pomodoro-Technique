@@ -93,7 +93,7 @@ body {
   color: black;
   font-family: "Courier New", Courier, monospace;
   font-size: 88px;
-  padding: 0 40px;
+  padding: 0 20px;
   border: 3px solid black;
   -webkit-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
   -moz-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
@@ -115,10 +115,6 @@ body {
     transparent 0 48px,
     rgba(255, 255, 255, 0.5) 48px 96px
   );
-}
-
-button:focus-visible {
-  outline: solid yellow;
 }
 
 .button-group > button {
