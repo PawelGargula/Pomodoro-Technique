@@ -28,8 +28,8 @@ body {
 	flex-grow: 1;
 }
 
-.full-screen-container::before {
-	background-color: var(--italian-green-color);
+.full-screen-container::after {
+	background-color: var(--italian-red-color);
 	content: "";
 	flex-grow: 1;
 }
