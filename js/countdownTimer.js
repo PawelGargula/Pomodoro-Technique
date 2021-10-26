@@ -1,10 +1,10 @@
-import { alarm } from "./alarm.js";
-import { message } from "./message.js";
-import { counter } from "./counter.js";
-import { startStopButton } from "./startStopButton.js";
-import { seconds } from "./seconds.js";
-import { minutes } from "./minutes.js";
-import { clock } from "./clock.js";
+import { alarm } from "./elements/alarm.js";
+import { message } from "./elements/message.js";
+import { counter } from "./elements/counter.js";
+import { startStopButton } from "./elements/startStopButton.js";
+import { seconds } from "./elements/seconds.js";
+import { minutes } from "./elements/minutes.js";
+import { clock } from "./elements/clock.js";
 import { lStorage } from "./localStorage.js";
 
 export const countdownTimer = {

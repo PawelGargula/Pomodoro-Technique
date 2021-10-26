@@ -3,7 +3,6 @@ Add tests with cypress
 Give info about your time spend in work (tasks), in periods of time like day, week, month
 Change pixels when user is in mobile
 hsl is not popular
-css style writing, maybe alphabetical
 hover all buttons in one line
 local storage not in elements
 inform about cookies (local storage)

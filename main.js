@@ -1,8 +1,8 @@
-import { countdownTimer } from "./elements/countdownTimer.js";
-import { startStopButton } from "./elements/startStopButton.js";
-import { resetButton } from "./elements/resetButton.js";
-import { clock } from "./elements/clock.js";
-import { minutes } from "./elements/minutes.js";
+import { countdownTimer } from "./js/countdownTimer.js";
+import { startStopButton } from "./js/elements/startStopButton.js";
+import { resetButton } from "./js/elements/resetButton.js";
+import { clock } from "./js/elements/clock.js";
+import { minutes } from "./js/elements/minutes.js";
 
 minutes.update(countdownTimer.minutesFromUser);
 
