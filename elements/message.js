@@ -10,6 +10,6 @@ export const message = {
     },
 
     reset() {
-        this.handle.innerText = "Message about break";
+        this.handle.innerText = "";
     }
 }
