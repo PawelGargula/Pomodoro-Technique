@@ -3,50 +3,49 @@
 }
 
 :root {
-	--darker-italian-white-color: hsl(72, 20%, 92%);
-	--font-color: hsl(288, 80%, 5%);
-	--italian-green-color: hsl(150, 100%, 27%);
-	--italian-red-color: hsl(357, 72%, 47%);
-	--italian-white-color: hsl(72, 20%, 95%);
+  --darker-italian-white-color: hsl(72, 20%, 92%);
+  --italian-green-color: hsl(150, 100%, 27%);
+  --italian-red-color: hsl(357, 72%, 47%);
+  --italian-white-color: hsl(72, 20%, 95%);
 }
 
 body {
-	font-family: 'Orbitron', sans-serif;
-	margin: 0;
-	overflow-x: hidden;
+  font-family: "Orbitron", sans-serif;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 .full-screen-container {
-	display: flex;
-	min-height: 100vh;
-	min-width: 100vw;
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 .full-screen-container::before {
-	background-color: var(--italian-green-color);
-	content: "";
-	flex-grow: 1;
+  background-color: var(--italian-green-color);
+  content: "";
+  flex-grow: 1;
 }
 
 .full-screen-container::after {
-	background-color: var(--italian-red-color);
-	content: "";
-	flex-grow: 1;
+  background-color: var(--italian-red-color);
+  content: "";
+  flex-grow: 1;
 }
 
 .content-container {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 .page-logo {
-	color: var(--italian-green-color);
-	font-size: 22px;
-	letter-spacing: 2px;
-	margin-bottom: 0;
+  color: var(--italian-green-color);
+  font-size: 24px;
+  letter-spacing: 3px;
+  margin-bottom: 0;
 }
 
 .info {
@@ -63,79 +62,80 @@ body {
 }
 
 .pomodoro-timer {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .timer-logo {
-	font-size: 16px;
-	letter-spacing: 1px;
-	margin-top: 0;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-top: 0;
 }
 
 #counter {
-	background-color: hsl(9, 100%, 64%, 0.8);
-	border-left: 2px solid black;
-	border-right: 2px solid black;
-	border-top: 2px solid black;
-	color: black;
-	font-size: 15px;
-	font-weight: 600;
-	padding: 0 16px;
-	z-index: 1;
+  background-color: hsl(9, 100%, 64%, 0.8);
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-top: 2px solid black;
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 16px;
+  z-index: 1;
 }
 
 #clock {
-	background-color: hsl(9, 100%, 64%, 0.8);
-	border: 3px solid black;
-	box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
-	color: black;
-	display: flex;
-	font-family: "Courier New", Courier, monospace;
-	font-size: 88px;
-	margin-bottom: 12px;
-	-moz-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
-	padding: 0 20px;
-	transition-duration: 0.3s;
-	-webkit-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
+  background-color: hsl(9, 100%, 64%, 0.8);
+  border: 3px solid black;
+  box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
+  color: black;
+  display: flex;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 94px;
+  margin-bottom: 16px;
+  -moz-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
+  padding: 0 40px;
+  transition-duration: 0.3s;
+  -webkit-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
 }
 
 #clock:hover {
-	background-color: tomato;
-	box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
-	cursor: pointer;
-	-moz-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
-	-webkit-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
+  background-color: tomato;
+  box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
+  cursor: pointer;
+  -moz-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
+  -webkit-box-shadow: 1px 0px 30px 0px rgba(50, 50, 50, 1);
 }
 
 #clock:focus-visible {
-	background-image: repeating-linear-gradient(
- -45deg,
- transparent 0 48px,
- rgba(255, 255, 255, 0.5) 48px 96px
- );
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 48px,
+    rgba(255, 255, 255, 0.5) 48px 96px
+  );
 }
 
 .button-group > button {
-	border: 2px solid var(--font-color);
-	border-radius: 4px;
-	box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
-	cursor: pointer;
-	display: block;
-	font-family: 'Orbitron', sans-serif;
-	font-size: 22px;
-	margin-bottom: 12px;
-	-moz-box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
-	transition-duration: 0.3s;
-	-webkit-box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
-	width: 100%;
+  border: 2px solid black;
+  border-radius: 4px;
+  box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
+  -webkit-box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
+  cursor: pointer;
+  display: block;
+  font-family: "Orbitron", sans-serif;
+  font-size: 24px;
+  margin-bottom: 12px;
+  padding: 0 7px;
+  transition-duration: 0.3s;
+  width: 100%;
 }
 
 button:hover {
-	box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
-	-moz-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
-	-webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+  box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+  -webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
 }
 
 button.start {
@@ -173,7 +173,7 @@ button#reset:focus-visible {
 }
 
 #message {
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 1px;
 }
 
@@ -181,4 +181,58 @@ button#reset:focus-visible {
   color: var(--italian-red-color);
   font-size: 12px;
   letter-spacing: 1px;
+}
+
+@media (max-width: 1280px) and (max-height: 800px) {
+  .timer-logo {
+    font-size: 14px;
+  }
+
+  #counter {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    font-size: 12px;
+    padding: 0 14px;
+  }
+
+  #clock {
+    border: 2px solid black;
+    font-size: 80px;
+    padding: 0 30px;
+  }
+
+  .button-group > button {
+    border: 1px solid black;
+    box-shadow: 1px 0px 7px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow: 1px 0px 7px 0px rgba(50, 50, 50, 1);
+    -webkit-box-shadow: 1px 0px 7px 0px rgba(50, 50, 50, 1);
+    font-size: 20px;
+  }
+
+  #message {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-logo {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  #clock {
+    box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+    -webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
+    font-size: 64px;
+  }
+
+  #message {
+    font-size: 13px;
+  }
+
+  .footer {
+    font-size: 10px;
+  }
 }
