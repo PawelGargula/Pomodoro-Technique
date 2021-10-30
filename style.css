@@ -52,7 +52,7 @@ body {
   color: var(--italian-green-color);
   display: inline-block;
   text-decoration: none;
-  animation: jump 2.4s 2;
+  animation: jump 2.4s 1s 2;
 }
 
 .info:hover {
