@@ -1,5 +1,4 @@
 hsl is not popular
-hover all buttons in one line
 inform about cookies (local storage)
 Message showing animation
 Show that there you can set the clock clicking on it

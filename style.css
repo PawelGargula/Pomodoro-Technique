@@ -3,10 +3,11 @@
 }
 
 :root {
-  --darker-italian-white-color: hsl(72, 20%, 92%);
   --italian-green-color: hsl(150, 100%, 26%);
   --italian-red-color: hsl(357, 72%, 47%);
   --italian-white-color: hsl(72, 20%, 95%);
+  --light-tomato-color: hsla(9, 100%, 64%, 0.8);
+  --button-color: ;
 }
 
 body {
@@ -88,7 +89,7 @@ body {
 }
 
 #counter {
-  background-color: hsl(9, 100%, 64%, 0.8);
+  background-color: var(--light-tomato-color);
   border-left: 2px solid black;
   border-right: 2px solid black;
   border-top: 2px solid black;
@@ -100,7 +101,7 @@ body {
 }
 
 #clock {
-  background-color: hsl(9, 100%, 64%, 0.8);
+  background-color: var(--light-tomato-color);
   border: 3px solid black;
   box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
   color: black;
@@ -131,6 +132,7 @@ body {
 }
 
 .button-group > button {
+  background-color: hsla(var(--button-color), 0.2);
   border: 2px solid black;
   border-radius: 4px;
   box-shadow: 1px 0px 10px 0px rgba(50, 50, 50, 1);
@@ -146,39 +148,26 @@ body {
   width: 100%;
 }
 
-button:hover {
+.button-group > button:hover {
+  background-color: hsla(var(--button-color), 0.4);
   box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
   -moz-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
   -webkit-box-shadow: 1px 0px 15px 0px rgba(50, 50, 50, 1);
 }
 
 button.start {
-  background-color: hsla(122, 39%, 49%, 0.2);
-}
-
-button.start:hover {
-  background-color: hsla(122, 39%, 49%, 0.4);
+  --button-color: 122, 39%, 49%;
 }
 
 button.stop {
-  background-color: hsl(4, 90%, 58%, 0.2);
-}
-
-button.stop:hover {
-  background-color: hsl(4, 90%, 58%, 0.4);
+  --button-color: 4, 90%, 58%;
 }
 
 button#reset {
-  background-color: hsl(195, 100%, 36%, 0.2);
+  --button-color: 195, 100%, 36%;
 }
 
-button#reset:hover {
-  background-color: hsl(195, 100%, 36%, 0.4);
-}
-
-button.start:focus-visible,
-button.stop:focus-visible,
-button#reset:focus-visible {
+.button-group > button:focus-visible {
   background-image: repeating-linear-gradient(
     -45deg,
     transparent 0 11px,
