@@ -5,4 +5,3 @@ inform about cookies (local storage)
 Add tasks
 Add tests with cypress
 Give info about your time spend in work (tasks), in periods of time like day, week, month
-h1 contrast problem - lighthouse mobile issue 
