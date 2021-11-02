@@ -17,6 +17,6 @@ export const minutes = {
     },
 
     update(value) {
-        this.handle.innerText = value < 10 ? `0${value}` : value;
+        this.handle.innerText = value.toString().padStart(2, "0");
     }
 }
