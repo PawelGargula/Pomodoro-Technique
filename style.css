@@ -8,6 +8,7 @@
   --italian-white-color: hsl(72, 20%, 95%);
   --light-tomato-color: hsla(9, 100%, 64%, 0.8);
   --button-color: ;
+  --clock-animation: 2.5s 4s 1;
 }
 
 body {
@@ -53,7 +54,7 @@ body {
   color: var(--italian-green-color);
   display: inline-block;
   text-decoration: none;
-  animation: jump 2.4s 1s 2;
+  animation: jump 2.4s 1s 1;
 }
 
 .info:hover {
@@ -111,6 +112,7 @@ body {
   margin-bottom: 16px;
   -moz-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
   padding: 0 40px;
+  position: relative;
   transition-duration: 0.3s;
   -webkit-box-shadow: 1px 0px 20px 0px rgba(50, 50, 50, 1);
 }
@@ -129,6 +131,43 @@ body {
     transparent 0 48px,
     rgba(255, 255, 255, 0.5) 48px 96px
   );
+}
+
+#clock::before {
+  animation: show-bg var(--clock-animation);
+  background-color: var(--light-tomato-color);
+  content: "";
+  left: 0;
+  position: absolute;
+}
+
+@keyframes show-bg {
+  from, to { min-width: 100%; min-height: 100%; }
+}
+
+#clock::after {
+  animation: type-text var(--clock-animation), blink-caret .75s step-end infinite;
+  border-right: 3px solid white;
+  color: white;
+  content: "";
+  position: absolute;
+}
+
+@keyframes type-text {
+  0% { content: "C"; }
+  7% { content: "Cl"; }
+  14% { content: "Cli"; }
+  21% { content: "Clic"; }
+  28% { content: "Click"; }
+  35% { content: "lick "; }
+  42% { content: "ick m"; }
+  47% { content: "ck me"; }
+  100% { content: "ck me"; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: white; }
 }
 
 .button-group > button {
