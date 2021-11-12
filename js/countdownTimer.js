@@ -10,17 +10,17 @@ import { lStorage } from "./localStorage.js";
 export const countdownTimer = {
     minutesFromUser: lStorage.getMinutes(),
     timerInterval: null,
-    isStopped: true,
+    stopped: true,
 
     startOrStop() {
-        if (this.isStopped) this.start();
+        if (this.stopped) this.start();
         else this.stop();
     },
 
     start() {
-        this.isStopped = false;
+        this.stopped = false;
         startStopButton.updateToStop();
-        message.reset();
+        message.erase();
         //Give a few miliseconds for program so then it can update clockElement correct after first second from start
         let timeEnd =
             this.now +
@@ -41,7 +41,7 @@ export const countdownTimer = {
 
         if (distanceToTimeEnd < 1) {
             alarm.play3Times();
-            message.showMessageAboutBreak(counter.value);
+            message.show(counter.value);
             counter.update();
             this.reset();
         }
@@ -66,7 +66,7 @@ export const countdownTimer = {
     },
 
     stop() {
-        this.isStopped = true;
+        this.stopped = true;
         clearInterval(this.timerInterval);
         startStopButton.updateToStart();
     },
