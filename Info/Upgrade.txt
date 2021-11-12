@@ -1,6 +1,6 @@
 inform about cookies (local storage)
-Message showing animation, maybe writing like on clock
-Animation that time is going, batery lowing in title?
+Animation that time is going, battery lowing in title?
+Show counter was upgrated after time end
 Add tasks
-Add tests with cypress
 Give info about your time spend in work (tasks), in periods of time like day, week, month
+Add tests with cypress
