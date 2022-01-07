@@ -12,6 +12,7 @@ export const message = {
     },
 
     write(text) {
+        document.title = text;
         this.handle.innerHTML = "";
         this.writingNow = true;
         [...text].forEach((letter, index) => {

@@ -40,10 +40,10 @@ export const countdownTimer = {
         this.updatePageTitle();
 
         if (distanceToTimeEnd < 1) {
-            alarm.play3Times();
-            message.show(counter.value);
-            counter.update();
             this.reset();
+            alarm.play3Times();
+            counter.update();
+            message.show(counter.value);
         }
     },
 
