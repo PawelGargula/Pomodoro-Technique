@@ -1,9 +1,11 @@
 # Pomodoro-Technique
 Demo: https://pawelgargula.github.io/Pomodoro-Technique/
 
+
 **What is it for?**
 
 It should increase your work efficiency.
+
 
 **How does it work by wikipedia?**
 
@@ -12,6 +14,7 @@ It should increase your work efficiency.
 Method developed by Francesco Cirillo in the late 1980s
 
 The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks." (Wiki) 
+
 
 **What features does this page have?**
 
