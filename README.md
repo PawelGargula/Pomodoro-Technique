@@ -13,7 +13,7 @@ It should increase your work efficiency.
 
 ## What features does this page have?
 
-- Timer which can be set (on timer click) by minutes (1 - 99). You can start, stop (start, stop is a one convertible button) or reset timer. The time elapsed also appears in the page title.
+- Timer which can be set (on timer click) by minutes (1 - 99). Last enetered value is saving in the local storage. You can start, stop (start, stop is a one convertible button) or reset timer. The time elapsed also appears in the page title.
 
 - Above timer there is a counter of finished intervals, it is counting to 4 then it is reset to 1.
   This value is changing after time is end.
