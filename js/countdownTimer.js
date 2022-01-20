@@ -42,8 +42,8 @@ export const countdownTimer = {
         if (distanceToTimeEnd < 1) {
             this.reset();
             alarm.play3Times();
-            counter.update();
             message.show(counter.value);
+            counter.update();
         }
     },
 
