@@ -69,10 +69,10 @@ body {
 @keyframes jump {
   10% { transform: translate(0%, 10%) scale(1, 0.7) }
   25% { transform: translate(0%, -50%) scale(1, 1); }
-  30% { transform: translate(0%, -50%) rotate(5deg); }
-  35% { transform: translate(0%, -50%) rotate(-5deg); }
-  40% { transform: translate(0%, -50%) rotate(5deg); }
-  45% { transform: translate(0%, -50%) rotate(-5deg); }
+  30% { transform: translate(0%, -50%) rotate(1deg); }
+  35% { transform: translate(0%, -50%) rotate(-1deg); }
+  40% { transform: translate(0%, -50%) rotate(1deg); }
+  45% { transform: translate(0%, -50%) rotate(-1deg); }
   50% { transform: translate(0%, -50%) scale(1, 1); color: tomato}
   70% { transform: translate(0%, 10%) scale(1, 0.7); }
   90% { transform: translate(0%, 0%) scale(1, 1); }
