@@ -20,4 +20,4 @@ It should increase your work efficiency.
 
 - After time is end, below buttons and in the page title it appears message about break depending on value in counter (When 1 - 3 there we have short break and when 4 it means long break for us).
 
-- In header "Pomodoro Technique" the letter "i" is a hyperlink to wikipedia.
+- The header "Pomodoro Technique" is a hyperlink to wikipedia.
