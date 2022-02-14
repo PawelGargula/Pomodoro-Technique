@@ -155,15 +155,16 @@ body {
 }
 
 @keyframes type-text {
-  0% { content: "C"; }
-  7% { content: "Cl"; }
-  14% { content: "Cli"; }
-  21% { content: "Clic"; }
-  28% { content: "Click"; }
-  35% { content: "lick "; }
-  42% { content: "ick m"; }
-  47% { content: "ck me"; }
-  100% { content: "ck me"; }
+  0% { content: "S"; }
+  7% { content: "Se"; }
+  14% { content: "Set"; }
+  21% { content: "Set\00a0"; }
+  28% { content: "Set T"; }
+  35% { content: "et Ti"; }
+  42% { content: "t Tim"; }
+  49% { content: "\00a0Time"; }
+  56% { content: "Timer"; }
+  100% { content: "Timer"; }
 }
 
 @keyframes blink-caret {
