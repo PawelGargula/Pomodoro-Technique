@@ -163,6 +163,7 @@ h2 {
   font-family: "Courier New", Courier, monospace;
   font-size: 6.5rem;
   grid-area: clock;
+  padding: 0;
   /* Relative for its pseudo elements: "before" and "after" */
   position: relative;
   transition-duration: 0.3s;
