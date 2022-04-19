@@ -39,45 +39,36 @@
 </head>
 
 <body>
-  <div class="full-screen-container">
-    <div class="content-container">
+  <header>
+    <h1>
+      <a title="Wiki" href="https://en.wikipedia.org/wiki/Pomodoro_Technique" rel="noopener" target="_blank">
+        Pomodoro Technique
+      </a>
+    </h1>
+  </header>
+
+  <main>
+    <section>
       <header>
-        <h1 class="page-logo">
-          <a class="info" title="Wiki" href="https://en.wikipedia.org/wiki/Pomodoro_Technique" rel="noopener"
-            target="_blank">
-            Pomodoro Technique
-          </a>
-        </h1>
+        <h2>Pomodoro Timer</h2>
       </header>
+      <span id="counter">Counter: 1</span>
+      <div id="clock" title="Set the timer" tabindex="0">
+        <span id="minutes">25</span>
+        <span>:</span>
+        <span id="seconds">00</span>
+      </div>
+      <button type="button" id="start-stop" class="start">
+        Start
+      </button>
+      <button type="button" id="reset">Reset</button>
+      <span id="message"></span>
+    </section>
+  </main>
 
-      <main>
-        <section>
-          <div class="pomodoro-timer">
-            <header>
-              <h2 class="timer-logo">Pomodoro Timer</h2>
-            </header>
-            <span id="counter">1</span>
-            <button id="clock" title="Set the timer">
-              <span id="minutes">25</span>
-              <span>:</span>
-              <span id="seconds">00</span>
-            </button>
-            <div class="button-group">
-              <button type="button" id="start-stop" class="start">
-                Start
-              </button>
-              <button type="button" id="reset">Reset</button>
-            </div>
-            <span id="message"></span>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <p class="footer">Thank you for visit! &copy; 2022 Ojci3c</p>
-      </footer>
-    </div>
-  </div>
+  <footer>
+    <p class="footer">Thank you for visit! &copy; 2022 Ojci3c</p>
+  </footer>
 </body>
 
 </html>
