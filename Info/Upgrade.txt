@@ -5,3 +5,4 @@ Show counter was upgrated after time end
 Add tasks
 Give info about your time spend in work (tasks), in periods of time like day, week, month
 Add tests with cypress
+Consider using Notification API
