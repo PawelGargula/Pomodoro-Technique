@@ -54,9 +54,10 @@ h1 {
   letter-spacing: .1rem;
   /* Reset default margin */
   margin-bottom: 0;
+  text-align: center;
 }
 
-a {
+h1 > a {
   animation: jump 2.4s 1s 1;
   color: var(--italian-green-color);
   /* Set "display: inline-block" for jump animation working */
@@ -160,6 +161,7 @@ h2 {
   color: black;
   display: flex;
   justify-content: center;
+  flex-flow: row wrap;
   font-family: "Courier New", Courier, monospace;
   font-size: 6.5rem;
   grid-area: clock;
