@@ -1,3 +1,5 @@
+Add indexDB for audio file
+Add service worker where place html, css, js files, so page can work in offline mode
 Update readme
 inform about cookies (local storage)
 Animation that time is going, battery lowing in title?
