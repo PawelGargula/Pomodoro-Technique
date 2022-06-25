@@ -18,6 +18,8 @@ It should increase your work efficiency.
 - Above timer there is a counter of finished intervals, it is counting to 4 then it is reset to 1.
   This value is changing after time is end.
 
-- After time is end, below buttons and in the page title it appears message about break depending on value in counter (When 1 - 3 there we have short break and when 4 it means long break for us).
+- After time is end, below buttons and in the page title it appears message about break depending on value in counter (When 1 - 3 there we have short break and when 4 it means long break for us). Plus we hear the short alarm, which plays 3 times.
+
+- Alarm's .flac file is stored in IndexedDB as 'blob'.
 
 - The header "Pomodoro Technique" is a hyperlink to wikipedia.
