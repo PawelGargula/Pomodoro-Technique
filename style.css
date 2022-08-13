@@ -11,7 +11,7 @@
   --italian-white-color: hsl(72, 20%, 95%);
   --light-tomato-color: hsla(9, 100%, 64%, 0.8);
   --button-color: ;
-  --clock-animation: 2.5s 4s 1;
+  --clock-animation: 2.5s .4s 1;
   --blink-caret-color: white;
 }
 
@@ -58,10 +58,7 @@ h1 {
 }
 
 h1 > a {
-  animation: jump 2.4s 1s 1;
   color: var(--italian-green-color);
-  /* Set "display: inline-block" for jump animation working */
-  display: inline-block;
   text-decoration: none;
 }
 
@@ -71,45 +68,6 @@ a:focus-visible {
 
 a:hover {
   color: tomato;
-}
-
-@keyframes jump {
-  10% {
-    transform: translate(0%, 10%) scale(1, 0.7)
-  }
-
-  25% {
-    transform: translate(0%, -50%) scale(1, 1);
-  }
-
-  30% {
-    transform: translate(0%, -50%) rotate(1deg);
-  }
-
-  35% {
-    transform: translate(0%, -50%) rotate(-1deg);
-  }
-
-  40% {
-    transform: translate(0%, -50%) rotate(1deg);
-  }
-
-  45% {
-    transform: translate(0%, -50%) rotate(-1deg);
-  }
-
-  50% {
-    transform: translate(0%, -50%) scale(1, 1);
-    color: tomato
-  }
-
-  70% {
-    transform: translate(0%, 10%) scale(1, 0.7);
-  }
-
-  90% {
-    transform: translate(0%, 0%) scale(1, 1);
-  }
 }
 
 section {
