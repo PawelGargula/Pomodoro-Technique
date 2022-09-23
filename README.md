@@ -23,3 +23,5 @@ It should increase your work efficiency.
 - Alarm's .flac file is stored in IndexedDB as 'blob'.
 
 - The header "Pomodoro Technique" is a hyperlink to wikipedia.
+
+- Page is accessible for users using screen readers
