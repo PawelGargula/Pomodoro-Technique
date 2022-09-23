@@ -52,6 +52,7 @@ export const countdownTimer = {
         seconds.update(sec);
         let min = minutes.countToClockMinutes(miliseconds);
         minutes.update(min);
+        clock.updateAriaLabel(min, sec);
     },
 
     updatePageTitle() {
@@ -61,6 +62,7 @@ export const countdownTimer = {
     reset() {
         minutes.update(this.minutesFromUser);
         seconds.update(0);
+        clock.updateAriaLabel(this.minutesFromUser, 0);
         this.stop();
         this.updatePageTitle();
     },
@@ -72,7 +74,7 @@ export const countdownTimer = {
     },
 
     set() {
-        let minutes = prompt("Enter minutes (1-99)", this.minutesFromUser);
+        let minutes = prompt("Enter minutes (1 to 99)", this.minutesFromUser);
         if (minutes === null) return;
 
         minutes = parseInt(minutes, 10);

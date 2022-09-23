@@ -280,6 +280,11 @@ h2 {
   letter-spacing: .1rem;
 }
 
+#hidden-message {
+  position: absolute;
+  left: -100vmax;
+}
+
 .footer {
   color: var(--italian-red-color);
   font-size: 1.2rem;

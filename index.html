@@ -52,17 +52,18 @@
       <header>
         <h2>Pomodoro Timer</h2>
       </header>
-      <span id="counter">Counter: 1</span>
-      <button id="clock" title="Set the timer">
+      <span id="counter" aria-live="polite">Counter: 1</span>
+      <button id="clock" title="Set the timer" aria-label="25 minutes and 0 seconds remaining">
         <span id="minutes">25</span>
         <span>:</span>
         <span id="seconds">00</span>
       </button>
-      <button type="button" id="start-stop" class="start">
+      <button type="button" id="start-stop" class="start" aria-label="Start the timer">
         Start
       </button>
-      <button type="button" id="reset">Reset</button>
-      <span id="message"></span>
+      <button type="button" id="reset" aria-label="Reset the timer">Reset</button>
+      <span id="message" aria-hidden="true"></span>
+      <span id="hidden-message" aria-live="polite"></span>
     </section>
   </main>
 
