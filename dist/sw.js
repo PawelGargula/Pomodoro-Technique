@@ -23,8 +23,8 @@ self.addEventListener("install", (event) => {
             `${origin}`,
             `${origin}index.html`,
             `${origin}index.74294d40.css`,
-            `${origin}index.da045f6a.js`,
-            `${origin}index.55b71553.js`,
+            `${origin}index.b95a201c.js`,
+            `${origin}index.16b007a0.js`,
         ])
     );
 });
