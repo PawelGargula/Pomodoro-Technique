@@ -25,3 +25,5 @@ It should increase your work efficiency.
 - The header "Pomodoro Technique" is a hyperlink to wikipedia.
 
 - Page is accessible for users using screen readers
+
+- Page enables fast loading (regardless of the network) and offline access thanks of service worker and its storage API - cache
