@@ -567,6 +567,18 @@ var _minutesJs = require("./js/elements/minutes.js");
 (0, _startStopButtonJs.startStopButton).handle.addEventListener("click", ()=>(0, _countdownTimerJs.countdownTimer).startOrStop());
 (0, _resetButtonJs.resetButton).handle.addEventListener("click", ()=>(0, _countdownTimerJs.countdownTimer).reset());
 (0, _clockJs.clock).handle.addEventListener("click", ()=>(0, _countdownTimerJs.countdownTimer).set());
+const registerServiceWorker = async ()=>{
+    if ("serviceWorker" in navigator) try {
+        // path needs to be written relative to the origin, app's root directory
+        const registration = await navigator.serviceWorker.register(`${location.href}sw.js`);
+        if (registration.installing) console.log("Service worker installing");
+        else if (registration.waiting) console.log("Service worker installed");
+        else if (registration.active) console.log("Service worker active");
+    } catch (error) {
+        console.error(`Registration failed with ${error}`);
+    }
+};
+registerServiceWorker();
 
 },{"./js/countdownTimer.js":"1PMzX","./js/elements/startStopButton.js":"fzlZh","./js/elements/resetButton.js":"7nh2l","./js/elements/clock.js":"7dbNF","./js/elements/minutes.js":"helnr"}],"1PMzX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
